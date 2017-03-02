@@ -1,8 +1,8 @@
 import qutip as qt
 import numpy as np
-import timeit
 
 cutoffs = [2, 3, 5, 7, 10, 15, 20, 30, 50]
+
 
 def f(Ncutoff):
     kap = 1.

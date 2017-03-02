@@ -11,7 +11,7 @@ cd(rootpath)
 println("Detected QuantumOptics.jl version: ", commitID)
 
 benchmark_directory = "benchmarks-QuantumOptics.jl"
-result_path = "results-QuantumOptics.jl/results-QuantumOptics.jl-$commitID.json"
+result_path = "results/results-QuantumOptics.jl-$commitID.json"
 
 const suites = BenchmarkGroup()
 

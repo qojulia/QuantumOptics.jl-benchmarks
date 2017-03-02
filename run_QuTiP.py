@@ -4,7 +4,8 @@ import json
 import qutip
 
 benchmark_directory = "benchmarks-QuTiP"
-result_path = "results-QuTiP/results-QuTiP-{}.json".format(qutip.version.version)
+result_path = "results/results-QuTiP-{}.json".format(qutip.version.version)
+
 
 def run_benchmark(name):
     m = importlib.import_module(benchmark_directory + "." + name)
@@ -15,11 +16,11 @@ def run_benchmark(name):
         trial = []
         for i in range(5):
             trial.append(timeit.timeit("m.f({})".format(N),
-                globals={"m": m},
-                number=1))
+                                       globals={"m": m}, number=1))
         results.append({"N": N, "t": min(trial)})
     print("")
     return results
+
 
 names = [
     "timeevolution_master"
@@ -28,7 +29,7 @@ names = [
 results = {}
 
 for name in names:
-    print("="*60)
+    print("=" * 60)
     print("Running ", name)
     results[name] = run_benchmark(name)
 
