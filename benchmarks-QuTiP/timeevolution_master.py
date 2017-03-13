@@ -1,8 +1,12 @@
 import qutip as qt
 import numpy as np
+import benchmarkutils
 
-cutoffs = [2, 3, 5, 7, 10, 15, 20, 30, 50]
+name = "timeevolution_master"
 
+samples = 2
+evals = 2
+cutoffs = range(10, 51, 10)
 
 def f(Ncutoff):
     kap = 1.
@@ -21,3 +25,14 @@ def f(Ncutoff):
     opts = qt.Odeoptions(num_cpus=1)
     n = qt.mesolve(H, psi0, tlist, c_ops, [ad*a], options=opts).expect[0]
     return n
+
+print("Benchmarking:", name)
+print("Cutoff: ", end="", flush=True)
+results = []
+for N in cutoffs:
+    print(N, "", end="", flush=True)
+    t = benchmarkutils.run_benchmark(f, N, samples=samples, evals=evals)
+    results.append({"N": N, "t": t})
+print()
+
+benchmarkutils.save(name, results)

@@ -1,7 +1,12 @@
 using QuantumOptics
 using BenchmarkTools
+include("benchmarkutils.jl")
 
-suite = BenchmarkGroup()
+name = "timeevolution_master"
+
+samples = 2
+evals = 2
+cutoffs = [10:10:50;]
 
 function f(Ncutoff)
     κ = 1.
@@ -27,6 +32,14 @@ function f(Ncutoff)
     exp_n
 end
 
-for Ncutoff in [2, 3, 5, 7, 10, 15, 20, 30, 50]
-    suite[Ncutoff] = @benchmarkable f($Ncutoff) samples=5 seconds=100
+println("Benchmarking: ", name)
+print("Cutoff: ")
+results = []
+for N in cutoffs
+    print(N, " ")
+    t = @belapsed f($N) samples=samples evals=evals
+    push!(results, Dict("N"=>N, "t"=>t))
 end
+println()
+
+benchmarkutils.save(name, results)
