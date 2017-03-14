@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "qfunc_operator"
+name = "qfunc_state"
 
 samples = 5
 evals = 20
@@ -23,8 +23,7 @@ for N in cutoffs
     print(N, " ")
     b = FockBasis(N-1)
     state = coherentstate(b, alpha)
-    op = state ⊗ dagger(state)
-    t = @belapsed f($op, $xvec, $yvec) samples=samples evals=evals
+    t = @belapsed f($state, $xvec, $yvec) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end
 println()

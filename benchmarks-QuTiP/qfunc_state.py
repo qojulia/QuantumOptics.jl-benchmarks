@@ -1,8 +1,9 @@
 import qutip as qt
+from qutip.wigner import _qfunc_pure
 import numpy as np
 import benchmarkutils
 
-name = "qfunc_operator"
+name = "qfunc_state"
 
 samples = 5
 evals = 20
@@ -21,8 +22,7 @@ results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
     state = qt.coherent(N, alpha)
-    op = state*state.dag()
-    t = benchmarkutils.run_benchmark(f, op, xvec, yvec, samples=samples, evals=evals)
+    t = benchmarkutils.run_benchmark(f, state, xvec, yvec, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 
