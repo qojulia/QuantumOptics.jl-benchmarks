@@ -4,8 +4,8 @@ import benchmarkutils
 
 name = "qfunc_operator"
 
-samples = 5
-evals = 20
+samples = 3
+evals = 5
 cutoffs = range(10, 101, 10)
 
 alpha = 0.7

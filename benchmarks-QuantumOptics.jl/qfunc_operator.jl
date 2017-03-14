@@ -4,8 +4,8 @@ include("benchmarkutils.jl")
 
 name = "qfunc_operator"
 
-samples = 5
-evals = 20
+samples = 3
+evals = 5
 cutoffs = [10:10:100;]
 
 alpha = 0.7
