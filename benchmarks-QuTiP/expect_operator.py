@@ -5,8 +5,8 @@ import benchmarkutils
 name = "expect_operator"
 
 samples = 5
-evals = 1000
-cutoffs = range(100, 2001, 100)
+evals = 100
+cutoffs = range(100, 2501, 100)
 
 alpha = 0.7
 

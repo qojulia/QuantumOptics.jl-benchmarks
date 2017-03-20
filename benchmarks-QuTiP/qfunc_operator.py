@@ -9,8 +9,8 @@ evals = 5
 cutoffs = range(10, 101, 10)
 
 alpha = 0.7
-xvec = np.linspace(-50, 50, 100)
-yvec = np.linspace(-50, 50, 100)
+xvec = np.linspace(-50, 50, 101)
+yvec = np.linspace(-50, 50, 101)
 
 def f(state, xvec, yvec):
     return qt.qfunc(state, xvec, yvec)

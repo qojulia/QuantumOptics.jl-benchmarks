@@ -3,6 +3,8 @@ module benchmarkutils
 using QuantumOptics
 using JSON
 
+set_zero_subnormals(true)
+
 # Detect the git commit hash
 const rootpath = abspath(".")
 const quantumoptics_directory = dirname(dirname(Base.functionloc(QuantumOptics.eval, Tuple{Void})[1]))

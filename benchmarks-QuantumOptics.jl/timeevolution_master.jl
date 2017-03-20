@@ -4,9 +4,9 @@ include("benchmarkutils.jl")
 
 name = "timeevolution_master"
 
-samples = 2
-evals = 2
-cutoffs = [10:10:50;]
+samples = 3
+evals = 5
+cutoffs = [5:5:60;]
 
 function f(Ncutoff)
     κ = 1.

@@ -5,8 +5,8 @@ import benchmarkutils
 name = "ptrace"
 
 samples = 5
-evals = 100
-cutoffs = range(2, 15)
+evals = 200
+cutoffs = range(2, 16)
 
 def create_suboperator(c0, alpha, N):
     x = np.linspace(0., 1., N**2)

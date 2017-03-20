@@ -5,7 +5,7 @@ include("benchmarkutils.jl")
 name = "coherentstate"
 
 samples = 5
-evals = 20
+evals = 10
 cutoffs = [10:1000:10010;]
 
 alpha = 0.7

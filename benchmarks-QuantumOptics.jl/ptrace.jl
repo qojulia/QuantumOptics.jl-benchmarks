@@ -5,8 +5,8 @@ include("benchmarkutils.jl")
 name = "ptrace"
 
 samples = 5
-evals = 100
-cutoffs = [2:1:30;]
+evals = 200
+cutoffs = [2:2:50;]
 
 function create_suboperator(c0, alpha, N)
     b = GenericBasis(N)

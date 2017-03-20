@@ -3,16 +3,16 @@ using BenchmarkTools
 include("benchmarkutils.jl")
 
 
-name = "expect_state"
+name = "variance_state"
 
 samples = 5
 evals = 100
-cutoffs = [5000:5000:150000;]
+cutoffs = [5000:5000:100001;]
 
 alpha = 0.7
 
 function f(op, state)
-    expect(op, state)
+    variance(op, state)
 end
 
 println("Benchmarking: ", name)

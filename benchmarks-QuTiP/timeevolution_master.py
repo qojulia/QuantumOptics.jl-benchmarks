@@ -4,9 +4,9 @@ import benchmarkutils
 
 name = "timeevolution_master"
 
-samples = 2
-evals = 2
-cutoffs = range(10, 51, 10)
+samples = 3
+evals = 5
+cutoffs = range(5, 61, 5)
 
 def f(Ncutoff):
     kap = 1.

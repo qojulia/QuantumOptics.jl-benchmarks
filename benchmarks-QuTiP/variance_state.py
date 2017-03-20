@@ -2,23 +2,25 @@ import qutip as qt
 import numpy as np
 import benchmarkutils
 
-name = "coherentstate"
+name = "variance_state"
 
 samples = 5
-evals = 10
-cutoffs = range(10, 10011, 1000)
+evals = 100
+cutoffs = range(5000, 100001, 5000)
 
 alpha = 0.7
 
-def f(N, alpha):
-    return qt.coherent(N, alpha, method="analytic")
+def f(op, state):
+    return qt.variance(op, state)
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    t = benchmarkutils.run_benchmark(f, N, alpha, samples=samples, evals=evals)
+    op = (qt.destroy(N) + qt.create(N))
+    psi = qt.Qobj(np.ones(N, complex)/(N**(1/2)))
+    t = benchmarkutils.run_benchmark(f, op, psi, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 

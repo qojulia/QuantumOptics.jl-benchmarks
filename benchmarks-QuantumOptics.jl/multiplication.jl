@@ -2,17 +2,18 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
+srand(0)
 
-name = "expect_state"
+name = "multiplication"
 
 samples = 5
 evals = 100
-cutoffs = [5000:5000:150000;]
+cutoffs = [50:50:1001;]
 
-alpha = 0.7
+s = 0.01
 
-function f(op, state)
-    expect(op, state)
+function f(op1, op2)
+    op1*op2
 end
 
 println("Benchmarking: ", name)
@@ -20,10 +21,9 @@ print("Cutoff: ")
 results = []
 for N in cutoffs
     print(N, " ")
-    b = FockBasis(N-1)
-    op = (destroy(b) + create(b))
-    psi = Ket(b, ones(Complex128, N)/sqrt(N))
-    t = @belapsed f($op, $psi) samples=samples evals=evals
+    op1 = sprand(Complex128, N, N, s)
+    op2 = sprand(Complex128, N, N, s)
+    t = @belapsed f($op1, $op2) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end
 println()

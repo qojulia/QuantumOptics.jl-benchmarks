@@ -6,8 +6,8 @@ include("benchmarkutils.jl")
 name = "expect_operator"
 
 samples = 5
-evals = 1000
-cutoffs = [100:100:2001;]
+evals = 100
+cutoffs = [100:100:2500;]
 
 alpha = 0.7
 

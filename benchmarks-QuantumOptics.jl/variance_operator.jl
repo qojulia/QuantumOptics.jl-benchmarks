@@ -3,16 +3,16 @@ using BenchmarkTools
 include("benchmarkutils.jl")
 
 
-name = "expect_state"
+name = "variance_operator"
 
 samples = 5
-evals = 100
-cutoffs = [5000:5000:150000;]
+evals = 50
+cutoffs = [100:100:2001;]
 
 alpha = 0.7
 
 function f(op, state)
-    expect(op, state)
+    variance(op, state)
 end
 
 println("Benchmarking: ", name)
@@ -23,7 +23,8 @@ for N in cutoffs
     b = FockBasis(N-1)
     op = (destroy(b) + create(b))
     psi = Ket(b, ones(Complex128, N)/sqrt(N))
-    t = @belapsed f($op, $psi) samples=samples evals=evals
+    rho = psi ⊗ dagger(psi)
+    t = @belapsed f($op, $rho) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end
 println()

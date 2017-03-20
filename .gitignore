@@ -1,4 +1,5 @@
 results/
+results-collected/
 __pycache__/
 *.py[cod]
 *$py.class
