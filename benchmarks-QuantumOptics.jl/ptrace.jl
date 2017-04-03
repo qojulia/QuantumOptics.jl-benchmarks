@@ -6,11 +6,11 @@ name = "ptrace"
 
 samples = 5
 evals = 200
-cutoffs = [2:2:50;]
+cutoffs = [2:30;]
 
 function create_suboperator(c0, alpha, N)
     b = GenericBasis(N)
-    data = reshape(c0 + alpha*complex(linspace(0., 1., N^2)), N, N)
+    data = transpose(reshape(c0 + alpha*complex(linspace(0., 1., N^2)), N, N))
     DenseOperator(b, data)
 end
 
@@ -28,13 +28,16 @@ end
 
 println("Benchmarking: ", name)
 print("Cutoff: ")
+checks = Dict{Int, Float64}()
 results = []
 for N in cutoffs
     print(N, " ")
     op = create_operator(N)
+    checks[N] = sum(abs(f(op).data))
     t = @belapsed f($op) samples=samples evals=evals
-    push!(results, Dict("N"=>N, "t"=>t))
+    push!(results, Dict("N"=>4*N^2, "t"=>t))
 end
 println()
 
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)

@@ -16,7 +16,7 @@ function f(Ncutoff)
     tsteps = 201
     T = Vector(linspace(0, tmax, tsteps))
 
-    b = FockBasis(Ncutoff)
+    b = FockBasis(Ncutoff-1)
     a = destroy(b)
     ad = dagger(a)
     n = number(b)
@@ -34,12 +34,15 @@ end
 
 println("Benchmarking: ", name)
 print("Cutoff: ")
+checks = Dict{Int, Float64}()
 results = []
 for N in cutoffs
     print(N, " ")
+    checks[N] = abs(sum(f(N)))
     t = @belapsed f($N) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end
 println()
 
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)

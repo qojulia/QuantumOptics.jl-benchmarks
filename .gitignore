@@ -1,5 +1,6 @@
 results/
 results-collected/
+checks/
 *.qo
 *.dat
 __pycache__/

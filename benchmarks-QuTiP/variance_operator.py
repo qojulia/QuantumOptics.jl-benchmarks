@@ -8,21 +8,22 @@ samples = 5
 evals = 50
 cutoffs = range(100, 2001, 100)
 
-alpha = 0.7
-
 def f(op, state):
     return qt.variance(op, state)
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
+checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
     op = (qt.destroy(N) + qt.create(N))
     psi = qt.Qobj(np.ones(N, complex)/(N**(1/2)))
     rho = psi*psi.dag()
+    checks[N] = f(op, rho)
     t = benchmarkutils.run_benchmark(f, op, rho, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)

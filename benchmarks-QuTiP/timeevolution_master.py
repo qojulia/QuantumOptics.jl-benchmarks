@@ -28,11 +28,14 @@ def f(Ncutoff):
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
+checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
+    checks[N] = sum(f(N))
     t = benchmarkutils.run_benchmark(f, N, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)

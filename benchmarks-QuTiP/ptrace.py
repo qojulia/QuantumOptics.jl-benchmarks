@@ -21,16 +21,19 @@ def create_operator(Ncutoff):
     return qt.tensor(op1, op2, op3, op4)
 
 def f(op):
-    return qt.ptrace(op, [2, 3])
+    return qt.ptrace(op, [1, 2])
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
+checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
     op = create_operator(N)
+    checks[N] = abs(f(op).full()).sum()
     t = benchmarkutils.run_benchmark(f, op, samples=samples, evals=evals)
-    results.append({"N": N, "t": t})
+    results.append({"N": 4*N**2, "t": t})
 print()
 
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)
