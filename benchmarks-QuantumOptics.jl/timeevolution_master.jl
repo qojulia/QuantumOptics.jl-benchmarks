@@ -28,7 +28,7 @@ function f(Ncutoff)
     ρ₀ = Ψ₀ ⊗ dagger(Ψ₀)
     exp_n = Float64[]
     fout(t, ρ) = push!(exp_n, real(expect(n, ρ)))
-    timeevolution.master(T, ρ₀, H, J; Gamma=Γ, fout=fout, reltol=1e-6, abstol=1e-8)
+    timeevolution.master(T, ρ₀, H, J; Gamma=Γ, fout=fout, reltol=1e-6, abstol=1e-6)
     exp_n
 end
 

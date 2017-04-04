@@ -11,7 +11,8 @@ names = [
     "ptrace",
     "qfunc_operator",
     "qfunc_state",
-    "timeevolution_master"
+    "timeevolution_master",
+    "timeevolution_particle"
 ]
 
 filenames = os.listdir("results")

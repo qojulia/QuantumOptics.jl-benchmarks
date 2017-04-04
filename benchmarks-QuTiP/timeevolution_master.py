@@ -8,6 +8,11 @@ samples = 3
 evals = 5
 cutoffs = range(5, 61, 5)
 
+options = qt.Options()
+options.num_cpus = 1
+options.atol = 1e-6
+options.rtol = 1e-6
+
 def f(Ncutoff):
     kap = 1.
     eta = 4*kap
@@ -22,8 +27,7 @@ def f(Ncutoff):
     c_ops = [np.sqrt(2*kap)*a]
 
     psi0 = qt.basis(Ncutoff, 0)
-    opts = qt.Odeoptions(num_cpus=1)
-    n = qt.mesolve(H, psi0, tlist, c_ops, [ad*a], options=opts).expect[0]
+    n = qt.mesolve(H, psi0, tlist, c_ops, [ad*a], options=options).expect[0]
     return n
 
 print("Benchmarking:", name)
