@@ -5,11 +5,12 @@ import benchmarkutils
 name = "timeevolution_particle"
 
 samples = 3
-evals = 5
-cutoffs = range(50, 201, 50)
+evals = 3
+cutoffs = range(100, 501, 100)
 
 options = qt.Options()
 options.num_cpus = 1
+options.nsteps = 10000
 options.atol = 1e-6
 options.rtol = 1e-6
 
