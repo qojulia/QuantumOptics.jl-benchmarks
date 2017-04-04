@@ -6,7 +6,7 @@ name = "timeevolution_particle"
 
 samples = 3
 evals = 3
-cutoffs = [100:100:1200;]
+cutoffs = [100:100:1000;]
 
 xmin = -10
 xmax = 10
