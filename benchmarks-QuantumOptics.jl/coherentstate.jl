@@ -9,7 +9,7 @@ evals = 10
 cutoffs = [10:1000:10010;]
 
 function f(b)
-    alpha = log(b.Nmax)
+    alpha = log(b.N+1)
     coherentstate(b, alpha)
 end
 
