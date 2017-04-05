@@ -5,8 +5,8 @@ include("benchmarkutils.jl")
 name = "timeevolution_particle"
 
 samples = 3
-evals = 3
-cutoffs = [100:100:1000;]
+evals = 1
+cutoffs = [50:50:450;]
 
 xmin = -10
 xmax = 10
@@ -25,10 +25,10 @@ function setup(Npoints)
 end
 
 function f(psi0, H, x)
-    T = [0:0.1:1;]
+    T = [0:1.:10;]
     exp_x = Float64[]
     fout(t, psi) = push!(exp_x, real(expect(x, psi)))
-    timeevolution.schroedinger(T, psi0, H; fout=fout, reltol=1e-6, abstol=1e-6)
+    timeevolution.schroedinger(T, psi0, H; fout=fout, reltol=1e-6, abstol=1e-8)
     exp_x
 end
 

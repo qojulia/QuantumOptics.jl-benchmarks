@@ -5,12 +5,12 @@ import benchmarkutils
 name = "timeevolution_master"
 
 samples = 3
-evals = 5
+evals = 1
 cutoffs = range(5, 61, 5)
 
 options = qt.Options()
 options.num_cpus = 1
-options.atol = 1e-6
+options.atol = 1e-8
 options.rtol = 1e-6
 
 def f(Ncutoff):

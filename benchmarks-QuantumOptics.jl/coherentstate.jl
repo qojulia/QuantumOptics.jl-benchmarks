@@ -5,8 +5,8 @@ include("benchmarkutils.jl")
 name = "coherentstate"
 
 samples = 5
-evals = 10
-cutoffs = [10:1000:10010;]
+evals = 10000
+cutoffs = [50:50:500;]
 
 function f(b)
     alpha = log(b.N+1)

@@ -26,6 +26,8 @@ testnames = os.listdir(sourcedir)
 for testname in testnames:
     if testname.startswith("."):
         continue
+    # if not "ptrace" in testname:
+    #     continue
     print("Open ", testname)
     f = open(os.path.join(sourcedir, testname))
     d = json.load(f)

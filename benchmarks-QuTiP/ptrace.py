@@ -5,7 +5,7 @@ import benchmarkutils
 name = "ptrace"
 
 samples = 5
-evals = 200
+evals = 100
 cutoffs = range(2, 16)
 
 def create_suboperator(c0, alpha, N):
@@ -15,7 +15,7 @@ def create_suboperator(c0, alpha, N):
 
 def create_operator(Ncutoff):
     op1 = create_suboperator(1, 0.2, Ncutoff)
-    op2 = create_suboperator(2, 0.3, Ncutoff)
+    op2 = create_suboperator(-2, 0.3, Ncutoff)
     op3 = create_suboperator(3, 0.4, 2)
     op4 = create_suboperator(4, 0.5, 2)
     return qt.tensor(op1, op2, op3, op4)

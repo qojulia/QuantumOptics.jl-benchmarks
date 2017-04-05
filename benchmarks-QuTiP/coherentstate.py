@@ -5,8 +5,8 @@ import benchmarkutils
 name = "coherentstate"
 
 samples = 5
-evals = 10
-cutoffs = range(10, 5011, 1000)
+evals = 100
+cutoffs = range(50, 501, 50)
 
 def f(N):
     alpha = np.log(N)

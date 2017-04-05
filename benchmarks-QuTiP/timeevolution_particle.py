@@ -5,13 +5,13 @@ import benchmarkutils
 name = "timeevolution_particle"
 
 samples = 3
-evals = 3
-cutoffs = range(100, 501, 100)
+evals = 1
+cutoffs = range(50, 451, 50)
 
 options = qt.Options()
 options.num_cpus = 1
-options.nsteps = 10000
-options.atol = 1e-6
+options.nsteps = 1000000
+options.atol = 1e-8
 options.rtol = 1e-6
 
 xmin = -10
@@ -31,11 +31,16 @@ def setup(Npoints):
     samplepoints_p = np.linspace(pmin, pmax, Npoints, endpoint=False)
 
     x = qt.Qobj(np.diag(samplepoints_x))
-    @np.vectorize
-    def momentumoperator(xi, xj):
-        return sum([p*np.exp(1j*p*(xj-xi)) for p in samplepoints_p])*dp*dx/(2*np.pi)
+    row0 = [sum([p*np.exp(-1j*p*dxji) for p in samplepoints_p])*dp*dx/(2*np.pi) for dxji in samplepoints_x - xmin]
+    row0 = np.array(row0)
+    col0 = row0.conj()
 
-    p = qt.Qobj(momentumoperator(*np.meshgrid(samplepoints_x, samplepoints_x)))
+    a = np.zeros([Npoints, Npoints], dtype=complex)
+    for i in range(Npoints):
+        a[i, i:] = row0[:Npoints-i]
+        a[i:, i] = col0[:Npoints-i]
+    p = qt.Qobj(a)
+
     H = p**2 + 2*x**2
 
     def gaussianstate(x0, p0, sigma):
@@ -47,7 +52,7 @@ def setup(Npoints):
     return psi0, H, x
 
 def f(psi0, H, x):
-    tlist = np.linspace(0, 1, 11)
+    tlist = np.linspace(0, 10, 11)
     exp_x = qt.mesolve(H, psi0, tlist, [], [x], options=options).expect[0]
     return exp_x
 

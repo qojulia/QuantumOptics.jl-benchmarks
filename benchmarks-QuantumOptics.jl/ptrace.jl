@@ -6,7 +6,7 @@ name = "ptrace"
 
 samples = 5
 evals = 200
-cutoffs = [2:30;]
+cutoffs = [2:15;]
 
 function create_suboperator(c0, alpha, N)
     b = GenericBasis(N)
@@ -16,14 +16,14 @@ end
 
 function create_operator(Ncutoff)
     op1 = create_suboperator(1, 0.2, Ncutoff)
-    op2 = create_suboperator(2, 0.3, Ncutoff)
+    op2 = create_suboperator(-2, 0.3, Ncutoff)
     op3 = create_suboperator(3, 0.4, 2)
     op4 = create_suboperator(4, 0.5, 2)
     tensor(op1, op2, op3, op4)
 end
 
 function f(op)
-    ptrace(op, [2,3])
+    ptrace(op, [2, 3])
 end
 
 println("Benchmarking: ", name)
