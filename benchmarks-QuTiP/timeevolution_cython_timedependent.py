@@ -52,5 +52,5 @@ for N in cutoffs:
     results.append({"N": N, "t": t})
 print()
 
-benchmarkutils.check(name.replace("cython_", ""), checks, 1e-4)
+benchmarkutils.check(name.replace("cython-", ""), checks, 1e-4)
 benchmarkutils.save(name, results)
