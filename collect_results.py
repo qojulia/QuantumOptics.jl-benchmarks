@@ -12,7 +12,8 @@ names = [
     "qfunc_operator",
     "qfunc_state",
     "timeevolution_master",
-    "timeevolution_particle"
+    "timeevolution_particle",
+    "timeevolution_timedependent"
 ]
 
 filenames = os.listdir("results")

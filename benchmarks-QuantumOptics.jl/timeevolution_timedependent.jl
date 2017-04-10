@@ -6,7 +6,7 @@ name = "timeevolution_timedependent"
 
 samples = 3
 evals = 1
-cutoffs = [10:100:10;]
+cutoffs = [10:10:150;]
 
 # System parameters
 const ω = 1.89 # Frequency of driving laser
@@ -19,7 +19,7 @@ const δc = ωc - ω # Detuning
 H(t, n, a, at) = ωc*n + η*(a*exp(1im*ω*t) + at*exp(-1im*ω*t))
 
 function f(Ncutoff)
-    b = FockBasis(Ncutoff)
+    b = FockBasis(Ncutoff-1)
 
     a = destroy(b)
     at = create(b)
