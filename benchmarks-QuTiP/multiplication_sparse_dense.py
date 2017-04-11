@@ -1,7 +1,7 @@
 import scipy.sparse as sp
 import benchmarkutils
 
-name = "multiplication"
+name = "multiplication_sparse_dense"
 
 samples = 5
 evals = 100
@@ -18,7 +18,7 @@ results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
     op1 = sp.rand(N, N, s, dtype=float)*0.2j
-    op2 = sp.rand(N, N, s, dtype=float)*0.1j
+    op2 = sp.rand(N, N, 1., dtype=float)*0.1j
     t = benchmarkutils.run_benchmark(f, op1, op2, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()

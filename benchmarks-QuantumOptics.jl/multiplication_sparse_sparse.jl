@@ -4,7 +4,7 @@ include("benchmarkutils.jl")
 
 srand(0)
 
-name = "multiplication"
+name = "multiplication_sparse_sparse"
 
 samples = 5
 evals = 100

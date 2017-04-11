@@ -2,7 +2,10 @@ import os
 import json
 
 names = [
-    "multiplication",
+    "multiplication_sparse_sparse",
+    "multiplication_sparse_dense",
+    "multiplication_dense_sparse",
+    "multiplication_dense_dense",
     "coherentstate",
     "expect_operator",
     "expect_state",
