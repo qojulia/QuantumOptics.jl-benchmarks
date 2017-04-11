@@ -1,10 +1,10 @@
 import scipy.sparse as sp
 import benchmarkutils
 
-name = "multiplication_dense_sparse"
+name = "multiplication_dense_dense"
 
 samples = 5
-evals = 100
+evals = 50
 cutoffs = range(50, 601, 50)
 
 def f(op1, op2):
