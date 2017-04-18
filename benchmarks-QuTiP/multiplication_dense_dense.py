@@ -7,6 +7,11 @@ samples = 5
 evals = 50
 cutoffs = range(50, 601, 50)
 
+def setup(N):
+    op1 = sp.rand(N, N, 1., dtype=float)*0.2j
+    op2 = sp.rand(N, N, 1., dtype=float)*0.1j
+    return op1, op2
+
 def f(op1, op2):
     return op1*op2
 
@@ -15,8 +20,7 @@ print("Cutoff: ", end="", flush=True)
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    op1 = sp.rand(N, N, 1., dtype=float)*0.2j
-    op2 = sp.rand(N, N, 1., dtype=float)*0.1j
+    op1, op2 = setup(N)
     t = benchmarkutils.run_benchmark(f, op1, op2, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()

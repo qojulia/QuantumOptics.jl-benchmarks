@@ -8,37 +8,29 @@ samples = 3
 evals = 1
 cutoffs = range(50, 451, 50)
 
-options = qt.Options()
-options.num_cpus = 1
-options.nsteps = 1000000
-options.atol = 1e-8
-options.rtol = 1e-6
-
-xmin = -10
-xmax = 10
-
-x0 = 2
-p0 = 1
-sigma0 = 1
-
-def setup(Npoints):
-    dx = (xmax - xmin)/Npoints
+def setup(N):
+    xmin = -10
+    xmax = 10
+    x0 = 2
+    p0 = 1
+    sigma0 = 1
+    dx = (xmax - xmin)/N
     pmin = -np.pi/dx
     pmax = np.pi/dx
-    dp = (pmax - pmin)/Npoints
+    dp = (pmax - pmin)/N
 
-    samplepoints_x = np.linspace(xmin, xmax, Npoints, endpoint=False)
-    samplepoints_p = np.linspace(pmin, pmax, Npoints, endpoint=False)
+    samplepoints_x = np.linspace(xmin, xmax, N, endpoint=False)
+    samplepoints_p = np.linspace(pmin, pmax, N, endpoint=False)
 
     x = qt.Qobj(np.diag(samplepoints_x))
     row0 = [sum([p*np.exp(-1j*p*dxji) for p in samplepoints_p])*dp*dx/(2*np.pi) for dxji in samplepoints_x - xmin]
     row0 = np.array(row0)
     col0 = row0.conj()
 
-    a = np.zeros([Npoints, Npoints], dtype=complex)
-    for i in range(Npoints):
-        a[i, i:] = row0[:Npoints-i]
-        a[i:, i] = col0[:Npoints-i]
+    a = np.zeros([N, N], dtype=complex)
+    for i in range(N):
+        a[i, i:] = row0[:N-i]
+        a[i:, i] = col0[:N-i]
     p = qt.Qobj(a)
 
     H = p**2 + 2*x**2
@@ -49,9 +41,16 @@ def setup(Npoints):
         return qt.Qobj(data)
 
     psi0 = gaussianstate(2., 1., 1.)
-    return psi0, H, x
 
-def f(psi0, H, x):
+    options = qt.Options()
+    options.num_cpus = 1
+    options.nsteps = 1000000
+    options.atol = 1e-8
+    options.rtol = 1e-6
+
+    return psi0, H, x, options
+
+def f(psi0, H, x, options):
     tlist = np.linspace(0, 10, 11)
     exp_x = qt.mesolve(H, psi0, tlist, [], [x], options=options).expect[0]
     return exp_x
@@ -62,9 +61,9 @@ checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    psi0, H, x = setup(N)
-    checks[N] = sum(f(psi0, H, x))
-    t = benchmarkutils.run_benchmark(f, psi0, H, x, samples=samples, evals=evals)
+    psi0, H, x, options = setup(N)
+    checks[N] = sum(f(psi0, H, x, options))
+    t = benchmarkutils.run_benchmark(f, psi0, H, x, options, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 

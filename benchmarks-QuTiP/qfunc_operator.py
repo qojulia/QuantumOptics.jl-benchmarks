@@ -8,10 +8,13 @@ samples = 3
 evals = 5
 cutoffs = range(10, 101, 10)
 
-alpha = 0.7
-alpha_check = 0.6 + 0.1j
-xvec = np.linspace(-50, 50, 101)
-yvec = np.linspace(-50, 50, 101)
+def setup(N):
+    alpha = 0.7
+    xvec = np.linspace(-50, 50, 101)
+    yvec = np.linspace(-50, 50, 101)
+    state = qt.coherent(N, alpha)
+    op = state*state.dag()
+    return op, xvec, yvec
 
 def f(state, xvec, yvec):
     return qt.qfunc(state, xvec, yvec, g=2)
@@ -22,8 +25,8 @@ checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    state = qt.coherent(N, alpha)
-    op = state*state.dag()
+    op, xvec, yvec = setup(N)
+    alpha_check = 0.6 + 0.1j
     checks[N] = f(op, [alpha_check.real], [alpha_check.imag])[0, 0]
     t = benchmarkutils.run_benchmark(f, op, xvec, yvec, samples=samples, evals=evals)
     results.append({"N": N, "t": t})

@@ -1,6 +1,7 @@
 results/
 results-collected/
 checks/
+sourcecode/
 *.qo
 *.dat
 __pycache__/

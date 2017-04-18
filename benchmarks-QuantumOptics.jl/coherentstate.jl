@@ -8,8 +8,13 @@ samples = 5
 evals = 10000
 cutoffs = [50:50:500;]
 
-function f(b)
-    alpha = log(b.N+1)
+function setup(N)
+    b = FockBasis(N-1)
+    alpha = log(N)
+    b, alpha
+end
+
+function f(b, alpha)
     coherentstate(b, alpha)
 end
 
@@ -19,9 +24,9 @@ checks = Dict{Int, Float64}()
 results = []
 for N in cutoffs
     print(N, " ")
-    b = FockBasis(N-1)
-    checks[N] = abs(expect(destroy(b), f(b)))
-    t = @belapsed f($b) samples=samples evals=evals
+    b, alpha = setup(N)
+    checks[N] = abs(expect(destroy(b), f(b, alpha)))
+    t = @belapsed f($b, $alpha) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end
 println()

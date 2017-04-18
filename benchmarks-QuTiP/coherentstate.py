@@ -8,8 +8,11 @@ samples = 5
 evals = 100
 cutoffs = range(50, 501, 50)
 
-def f(N):
+def setup(N):
     alpha = np.log(N)
+    return alpha
+
+def f(N, alpha):
     return qt.coherent(N, alpha, method="analytic")
 
 print("Benchmarking:", name)
@@ -18,8 +21,9 @@ checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    checks[N] = qt.expect(qt.destroy(N), f(N))
-    t = benchmarkutils.run_benchmark(f, N, samples=samples, evals=evals)
+    alpha = setup(N)
+    checks[N] = qt.expect(qt.destroy(N), f(N, alpha))
+    t = benchmarkutils.run_benchmark(f, N, alpha, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 

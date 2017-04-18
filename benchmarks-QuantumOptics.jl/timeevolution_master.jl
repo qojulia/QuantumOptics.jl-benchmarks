@@ -8,7 +8,11 @@ samples = 3
 evals = 1
 cutoffs = [5:5:60;]
 
-function f(Ncutoff)
+function setup(N)
+    nothing
+end
+
+function f(N)
     κ = 1.
     η = 4κ
     Δ = 0
@@ -16,7 +20,7 @@ function f(Ncutoff)
     tsteps = 201
     T = Vector(linspace(0, tmax, tsteps))
 
-    b = FockBasis(Ncutoff-1)
+    b = FockBasis(N-1)
     a = destroy(b)
     ad = dagger(a)
     n = number(b)

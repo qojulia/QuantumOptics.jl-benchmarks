@@ -8,15 +8,13 @@ samples = 3
 evals = 1
 cutoffs = [50:50:450;]
 
-xmin = -10
-xmax = 10
-
-x0 = 2
-p0 = 1
-sigma0 = 1
-
-function setup(Npoints)
-    bx = PositionBasis(xmin, xmax, Npoints)
+function setup(N)
+    xmin = -10
+    xmax = 10
+    x0 = 2
+    p0 = 1
+    sigma0 = 1
+    bx = PositionBasis(xmin, xmax, N)
     bp = MomentumBasis(bx)
     x = position(bx)
     p = momentum(bp)
@@ -24,7 +22,7 @@ function setup(Npoints)
     Txp = dagger(Tpx)
     H = LazySum(LazyProduct(Txp, p^2, Tpx), 2*x^2)
     psi0 = gaussianstate(bx, x0, p0, sigma0)
-    (psi0, H, x)
+    psi0, H, x
 end
 
 function f(psi0, H, x)
@@ -48,5 +46,5 @@ for N in cutoffs
 end
 println()
 
-benchmarkutils.check(name, checks)
+benchmarkutils.check("timeevolution_particle", checks)
 benchmarkutils.save(name, results)

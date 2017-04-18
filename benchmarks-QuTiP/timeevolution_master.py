@@ -8,12 +8,14 @@ samples = 3
 evals = 1
 cutoffs = range(5, 61, 5)
 
-options = qt.Options()
-options.num_cpus = 1
-options.atol = 1e-8
-options.rtol = 1e-6
+def setup(N):
+    options = qt.Options()
+    options.num_cpus = 1
+    options.atol = 1e-8
+    options.rtol = 1e-6
+    return options
 
-def f(Ncutoff):
+def f(N, options):
     kap = 1.
     eta = 4*kap
     delta = 0
@@ -21,12 +23,12 @@ def f(Ncutoff):
     tsteps = 201
     tlist = np.linspace(0, tmax, tsteps)
 
-    a = qt.destroy(Ncutoff)
+    a = qt.destroy(N)
     ad = a.dag()
     H = delta*ad*a + eta*(a + ad)
     c_ops = [np.sqrt(2*kap)*a]
 
-    psi0 = qt.basis(Ncutoff, 0)
+    psi0 = qt.basis(N, 0)
     n = qt.mesolve(H, psi0, tlist, c_ops, [ad*a], options=options).expect[0]
     return n
 
@@ -36,8 +38,9 @@ checks = {}
 results = []
 for N in cutoffs:
     print(N, "", end="", flush=True)
-    checks[N] = sum(f(N))
-    t = benchmarkutils.run_benchmark(f, N, samples=samples, evals=evals)
+    options = setup(N)
+    checks[N] = sum(f(N, options))
+    t = benchmarkutils.run_benchmark(f, N, options, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 

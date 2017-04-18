@@ -6,21 +6,20 @@ name = "timeevolution_timedependent"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:150;]
+cutoffs = [10:10:120;]
 
-# System parameters
-const ω = 1.89 # Frequency of driving laser
-const ωc = 2.13 # Cavity frequency
-const η = 0.76 # Pump strength
-const κ = 0.34 # Decay rate
-const δc = ωc - ω # Detuning
+function setup(N)
+    nothing
+end
 
+function f(N)
+    ω = 1.89 # Frequency of driving laser
+    ωc = 2.13 # Cavity frequency
+    η = 0.76 # Pump strength
+    κ = 0.34 # Decay rate
+    δc = ωc - ω # Detuning
 
-H(t, n, a, at) = ωc*n + η*(a*exp(1im*ω*t) + at*exp(-1im*ω*t))
-
-function f(Ncutoff)
-    b = FockBasis(Ncutoff-1)
-
+    b = FockBasis(N-1)
     a = destroy(b)
     at = create(b)
     n = number(b)
@@ -37,6 +36,7 @@ function f(Ncutoff)
     T = [0:1.:10;]
     αt = Float64[]
     fout(t, rho) = push!(αt, real(expect(a, rho)))
+    H(t, n, a, at) = ωc*n + η*(a*exp(1im*ω*t) + at*exp(-1im*ω*t))
     HJ(t::Float64, rho::DenseOperator) = (H(t, n, a, at), J, Jdagger)
     timeevolution.master_dynamic(T, psi0, HJ; Gamma=Γ, fout=fout, reltol=1e-6, abstol=1e-8)
     αt
