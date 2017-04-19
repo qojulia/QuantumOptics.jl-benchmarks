@@ -5,7 +5,7 @@ matlabbenchmarks = "benchmarks-QuantumOpticsToolbox"
 juliabenchmarks = "benchmarks-QuantumOptics.jl"
 pythonbenchmarks = "benchmarks-QuTiP"
 
-subprocess.run(["python", "hardware-specs.py"], check=True)
+subprocess.run(["python", "hardware_specs.py"], check=True)
 
 os.chdir(matlabbenchmarks)
 subprocess.run(["matlab", "-nodisplay", "-nosplash", "-nodesktop", "-r", 'run runall.m; quit;'], check=True)
