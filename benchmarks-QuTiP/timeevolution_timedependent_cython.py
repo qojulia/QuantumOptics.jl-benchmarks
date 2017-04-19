@@ -2,7 +2,7 @@ import qutip as qt
 import numpy as np
 import benchmarkutils
 
-name = "cython-timeevolution_timedependent"
+name = "timeevolution_timedependent[cython]"
 
 samples = 3
 evals = 1
@@ -52,5 +52,5 @@ for N in cutoffs:
     results.append({"N": N, "t": t})
 print()
 
-benchmarkutils.check(name.replace("cython-", ""), checks, 1e-4)
+benchmarkutils.check(name, checks, 1e-4)
 benchmarkutils.save(name, results)

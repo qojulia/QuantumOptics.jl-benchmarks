@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "fft-timeevolution_particle"
+name = "timeevolution_particle[fft]"
 
 samples = 3
 evals = 1
@@ -46,5 +46,5 @@ for N in cutoffs
 end
 println()
 
-benchmarkutils.check("timeevolution_particle", checks)
+benchmarkutils.check(name, checks)
 benchmarkutils.save(name, results)

@@ -21,12 +21,16 @@ names = [
 
 filenames = os.listdir("results")
 
-
 def extract_version(filename, testname):
     name, _ = os.path.splitext(filename)
+    if name.endswith("]"): # For example timeevolution_particle[fft]
+        name, variant = name.rsplit("[", 1)
+        variant = "/" + variant[:-1]
+    else:
+        variant = ""
     assert name.startswith("results-"), name
     assert name.endswith("-" + testname), name
-    return name[len("results-"):-len("-" + testname)]
+    return name[len("results-"):-len("-" + testname)] + variant
 
 def cutdigits(x):
     return float('%.3g' % (x))

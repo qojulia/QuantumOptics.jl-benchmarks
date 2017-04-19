@@ -16,9 +16,15 @@ println("Detected QuantumOptics.jl version: ", commitID)
 benchmark_directory = "benchmarks-QuantumOptics.jl"
 checkvalues_directory = "checks"
 
+function examplename(name)
+    if endswith(name, "]")
+        return rsplit(name, "[", limit=2)[1]
+    end
+    name
+end
 
 function check(name, D, eps=1e-5)
-    check_path = "../checks/$name.json"
+    check_path = "../checks/$(examplename(name)).json"
     if ispath(check_path)
         println("Checking against check file.")
         data = JSON.parsefile(check_path)
