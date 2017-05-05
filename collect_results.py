@@ -14,6 +14,8 @@ names = [
     "ptrace",
     "qfunc_operator",
     "qfunc_state",
+    "wigner_operator",
+    "wigner_state",
     "timeevolution_master",
     "timeevolution_particle",
     "timeevolution_timedependent"
