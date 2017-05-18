@@ -10,8 +10,8 @@ cutoffs = range(10, 101, 10)
 
 def setup(N):
     alpha = 0.7
-    xvec = np.linspace(-50, 50, 10)
-    yvec = np.linspace(-50, 50, 10)
+    xvec = np.linspace(-50, 50, 100)
+    yvec = np.linspace(-50, 50, 100)
     state = qt.coherent(N, alpha)
     op = state*state.dag()
     return op, xvec, yvec

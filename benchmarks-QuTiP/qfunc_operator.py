@@ -17,7 +17,7 @@ def setup(N):
     return op, xvec, yvec
 
 def f(state, xvec, yvec):
-    return qt.qfunc(state, xvec, yvec, g=2)
+    return qt.qfunc(state, xvec, yvec)
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)

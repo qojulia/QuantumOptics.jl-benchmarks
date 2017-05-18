@@ -10,8 +10,8 @@ cutoffs = [10:10:100;]
 
 function setup(N)
     alpha = 0.7
-    xvec = collect(linspace(-50, 50, 10))
-    yvec = collect(linspace(-50, 50, 10))
+    xvec = collect(linspace(-50, 50, 100))
+    yvec = collect(linspace(-50, 50, 100))
     b = FockBasis(N-1)
     state = coherentstate(b, alpha)
     op = state ⊗ dagger(state)
