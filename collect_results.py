@@ -7,6 +7,7 @@ names = [
     "multiplication_dense_sparse",
     "multiplication_dense_dense",
     "coherentstate",
+    "displace",
     "expect_operator",
     "expect_state",
     "variance_operator",
