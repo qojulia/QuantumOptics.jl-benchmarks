@@ -6,7 +6,7 @@ name = "timeevolution_master"
 
 samples = 3
 evals = 1
-cutoffs = range(5, 61, 5)
+cutoffs = range(5, 56, 5)
 
 def setup(N):
     options = qt.Options()

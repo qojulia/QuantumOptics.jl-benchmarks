@@ -6,7 +6,7 @@ name = "ptrace"
 
 samples = 5
 evals = 200
-cutoffs = [2:15;]
+cutoffs = [2:18;]
 
 function setup(N)
     function create_suboperator(c0, alpha, N)

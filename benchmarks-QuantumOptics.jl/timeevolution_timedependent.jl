@@ -6,7 +6,7 @@ name = "timeevolution_timedependent"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:120;]
+cutoffs = [10:10:160;]
 
 function setup(N)
     nothing

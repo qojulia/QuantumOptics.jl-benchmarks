@@ -1,7 +1,7 @@
 
 function result = bench_ptrace()
     name = 'ptrace';
-    cutoffs = [2:11];
+    cutoffs = [2:10];
     result = [];
     for N = cutoffs
         op = create_operator(N);

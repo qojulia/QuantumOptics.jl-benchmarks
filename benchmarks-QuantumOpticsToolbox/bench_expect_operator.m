@@ -1,7 +1,7 @@
 
 function result = bench_expect_operator()
     name = 'expect_operator';
-    cutoffs = [100:100:1000];
+    cutoffs = [100:100:700];
     result = [];
     for N = cutoffs
         op = (destroy(N) + create(N));
