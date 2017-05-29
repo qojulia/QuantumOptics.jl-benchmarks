@@ -19,6 +19,7 @@ names = [
     "wigner_state",
     "timeevolution_master",
     "timeevolution_particle",
+    "timeevolution_decelerating_particle",
     "timeevolution_timedependent"
 ]
 
