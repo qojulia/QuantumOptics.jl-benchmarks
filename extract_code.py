@@ -93,15 +93,15 @@ def testpython(name):
     outputpath = os.path.join(outputdir, name)
     subprocess.run(["python", outputpath], check=True)
 
-# # Extract QuantumOptics.jl source code
-# filenames = os.listdir(juliabenchmarks)
-# for name in filenames:
-#     if "benchmarkutils" in name or not name.endswith(".jl"):
-#         continue
-#     print("Extract: ", name)
-#     sourcecode = extract_julia(os.path.join(juliabenchmarks, name))
-#     write(name, sourcecode)
-#     testjulia(name)
+# Extract QuantumOptics.jl source code
+filenames = os.listdir(juliabenchmarks)
+for name in filenames:
+    if "benchmarkutils" in name or not name.endswith(".jl"):
+        continue
+    print("Extract: ", name)
+    sourcecode = extract_julia(os.path.join(juliabenchmarks, name))
+    write(name, sourcecode)
+    testjulia(name)
 
 
 # Extract QuTiP source code
