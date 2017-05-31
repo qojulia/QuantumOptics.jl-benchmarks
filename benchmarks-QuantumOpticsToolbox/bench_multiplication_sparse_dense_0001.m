@@ -8,8 +8,8 @@ function result = bench_multiplication_sparse_dense_0001()
     for N = cutoffs
         T = 0.;
         for i=1:Nrand
-            op1 = sprand(N, N, s);
-            op2 = rand(N, N);
+            op1 = (1.+0.3j)*sprand(N, N, s);
+            op2 = (1.+0.3j)*rand(N, N);
             f_ = @() f(op1, op2);
             T = T + timeit(f_);
         end

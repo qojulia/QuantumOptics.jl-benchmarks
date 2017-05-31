@@ -8,8 +8,8 @@ function result = bench_multiplication_sparse_sparse_01()
     for N = cutoffs
         T = 0.;
         for i=1:Nrand
-            op1 = sprand(N, N, s);
-            op2 = sprand(N, N, s);
+            op1 = (1.+0.3j)*sprand(N, N, s);
+            op2 = (1.+0.3j)*sprand(N, N, s);
             f_ = @() f(op1, op2);
             T = T + timeit(f_);
         end
