@@ -6,7 +6,7 @@ name = "timeevolution_decelerating_particle"
 
 samples = 3
 evals = 1
-cutoffs = range(10, 51, 10)
+cutoffs = range(10, 41, 10)
 
 def setup(N):
     xmin = -5
@@ -35,9 +35,9 @@ def setup(N):
 
     H = p**2 + 2*x**2
 
-    def gaussianstate(x0, p0, sigma):
-        alpha = 1./(np.pi**(1/4)*np.sqrt(sigma))*np.sqrt(dx)
-        data = alpha*np.exp(1j*p0*(samplepoints_x-x0) - (samplepoints_x-x0)**2/(2*sigma**2))
+    def gaussianstate(x0, p0, sigma0):
+        alpha = 1./(np.pi**(1/4)*np.sqrt(sigma0))*np.sqrt(dx)
+        data = alpha*np.exp(1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0)**2/(2*sigma0**2))
         return qt.Qobj(data)
 
     psi0 = gaussianstate(x0, p0, sigma0)
