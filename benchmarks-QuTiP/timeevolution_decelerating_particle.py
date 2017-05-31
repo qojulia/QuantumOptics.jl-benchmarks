@@ -6,7 +6,7 @@ name = "timeevolution_decelerating_particle"
 
 samples = 3
 evals = 1
-cutoffs = range(5, 51, 5)
+cutoffs = range(5, 46, 5)
 
 def setup(N):
     xmin = -5

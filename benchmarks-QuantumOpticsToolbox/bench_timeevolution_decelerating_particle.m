@@ -1,7 +1,7 @@
 
 function result = bench_timeevolution_decelerating_particle()
     name = 'timeevolution_decelerating_particle';
-    cutoffs = 5:5:40;
+    cutoffs = 5:5:35;
     result = [];
     for N = cutoffs
         [rho0, L, x] = setup(N);

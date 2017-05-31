@@ -6,7 +6,7 @@ name = "timeevolution_decelerating_particle"
 
 samples = 3
 evals = 1
-cutoffs = [5:5:60;]
+cutoffs = [5:5:70;]
 
 function setup(N)
     xmin = -5
