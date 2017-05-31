@@ -1,12 +1,11 @@
 
-function result = bench_multiplication()
-    name = 'multiplication';
-    s = 0.01;
+function result = bench_multiplication_dense_dense()
+    name = 'multiplication_dense_dense';
     cutoffs = [50:50:1001];
     result = [];
     for N = cutoffs
-        op1 = sprandn(N, N, s);
-        op2 = sprandn(N, N, s);
+        op1 = rand(N, N);
+        op2 = rand(N, N);
         f_ = @() f(op1, op2);
         result = [result, timeit(f_)];
     end

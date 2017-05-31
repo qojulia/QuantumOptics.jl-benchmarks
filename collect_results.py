@@ -2,9 +2,15 @@ import os
 import json
 
 names = [
-    "multiplication_sparse_sparse",
-    "multiplication_sparse_dense",
-    "multiplication_dense_sparse",
+    "multiplication_sparse_sparse_01",
+    "multiplication_sparse_sparse_001",
+    "multiplication_sparse_sparse_0001",
+    "multiplication_sparse_dense_01",
+    "multiplication_sparse_dense_001",
+    "multiplication_sparse_dense_0001",
+    "multiplication_dense_sparse_01",
+    "multiplication_dense_sparse_001",
+    "multiplication_dense_sparse_0001",
     "multiplication_dense_dense",
     "coherentstate",
     "displace",

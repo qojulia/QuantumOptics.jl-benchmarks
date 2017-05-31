@@ -4,14 +4,15 @@ include("benchmarkutils.jl")
 
 srand(0)
 
-name = "multiplication_sparse_sparse"
+name = "multiplication_sparse_sparse_01"
 
-samples = 5
-evals = 100
-cutoffs = [50:50:1001;]
+samples = 2
+evals = 5
+cutoffs = [50:50:1000;]
+Nrand = 5
 
 function setup(N)
-    s = 0.01
+    s = 0.1
     op1 = sprand(Complex128, N, N, s)
     op2 = sprand(Complex128, N, N, s)
     op1, op2
@@ -26,9 +27,12 @@ print("Cutoff: ")
 results = []
 for N in cutoffs
     print(N, " ")
-    op1, op2 = setup(N)
-    t = @belapsed f($op1, $op2) samples=samples evals=evals
-    push!(results, Dict("N"=>N, "t"=>t))
+    T = 0.
+    for i=1:Nrand
+        op1, op2 = setup(N)
+        T += @belapsed f($op1, $op2) samples=samples evals=evals
+    end
+    push!(results, Dict("N"=>N, "t"=>T/Nrand))
 end
 println()
 

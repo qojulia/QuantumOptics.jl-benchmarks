@@ -4,11 +4,12 @@ include("benchmarkutils.jl")
 
 srand(0)
 
-name = "multiplication_dense_sparse"
+name = "multiplication_dense_sparse_001"
 
-samples = 5
-evals = 100
-cutoffs = [50:50:1001;]
+samples = 2
+evals = 5
+cutoffs = [50:50:1000;]
+Nrand = 5
 
 function setup(N)
     s = 0.01
@@ -28,9 +29,12 @@ print("Cutoff: ")
 results = []
 for N in cutoffs
     print(N, " ")
-    op1, op2, result = setup(N)
-    t = @belapsed f($op1, $op2, $result) samples=samples evals=evals
-    push!(results, Dict("N"=>N, "t"=>t))
+    T = 0.
+    for i=1:Nrand
+        op1, op2, result = setup(N)
+        T += @belapsed f($op1, $op2, $result) samples=samples evals=evals
+    end
+    push!(results, Dict("N"=>N, "t"=>T/Nrand))
 end
 println()
 
