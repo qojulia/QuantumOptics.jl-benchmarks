@@ -12,4 +12,4 @@ bench_multiplication_dense_sparse_001();
 bench_multiplication_dense_sparse_0001();
 bench_multiplication_dense_dense();
 bench_timeevolution_master();
-bench_timeevolution_deceleratingparticle();
+bench_timeevolution_decelerating_particle();

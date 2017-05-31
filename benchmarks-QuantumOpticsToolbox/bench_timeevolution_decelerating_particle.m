@@ -1,7 +1,7 @@
 
-function result = bench_timeevolution_deceleratingparticle()
-    name = 'timeevolution_deceleratingparticle';
-    cutoffs = 10:10:40;
+function result = bench_timeevolution_decelerating_particle()
+    name = 'timeevolution_decelerating_particle';
+    cutoffs = 5:5:40;
     result = [];
     for N = cutoffs
         [rho0, L, x] = setup(N);
@@ -28,7 +28,7 @@ function [rho0, L, x] = setup(N)
     samplepoints_p = tmp(1:end-1);
 
     x = qo(diag(samplepoints_x));
-    
+
     % Create momentum operator
     row0 = zeros(1, N);
     for i=1:N
@@ -53,7 +53,7 @@ function [rho0, L, x] = setup(N)
     data = alpha*exp(-1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0).^2/(2*sigma0^2));
     psi0 = qo(data);
     C = (x + 1j*p);
-    LH = -1i * (spre(H) - spost(H)); 
+    LH = -1i * (spre(H) - spost(H));
     L1 = spre(C)*spost(C')-0.5*spre(C'*C)-0.5*spost(C'*C);
     L = LH+L1;
 
