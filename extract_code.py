@@ -17,6 +17,7 @@ template = """\
 # Setup code
 # ----------
 N = 2 # Hilbert space cutoff parameter
+s = 0.1 # sparseness
 {setupcode}
 
 # --------------
