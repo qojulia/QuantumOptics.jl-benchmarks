@@ -11,16 +11,17 @@ function result = bench_timeevolution_master()
 end
 
 function f(Ncutoff)
-    kap = 1.;
-    eta = 4*kap;
+    kappa = 1.;
+    eta = 4*kappa;
     delta = 0;
-    tmax = 100;
-    tsteps = 201;
-    tlist = linspace(0, tmax, tsteps);
+    tspan = 0:0.5:100;
+
     a = destroy(Ncutoff);
-    ad = a';
-    H = delta*ad*a + eta*(a + ad);
-    C = sqrt(2*kap)*a;
+    at = create(Ncutoff);
+    n = at*a;
+    
+    H = delta*n + eta*(a + at);
+    C = sqrt(2*kappa)*a;
     LH = -1i * (spre(H) - spost(H)); 
     L1 = spre(C)*spost(C')-0.5*spre(C'*C)-0.5*spost(C'*C);
     L = LH+L1;
@@ -31,9 +32,14 @@ function f(Ncutoff)
     
     % Set up options, if required
     options.reltol = 1e-6;
-    options.abstol = 1e-6;
+    options.abstol = 1e-8;
     % Write out the data file
-    ode2file('file1.dat', L, rho0, tlist, options);
+    ode2file('file1.dat', L, rho0, tspan, options);
     % Call the equation solver
     odesolve('file1.dat','file2.dat');
+    % Read in the output data file
+    fid = fopen('file2.dat','rb');
+    rho = qoread(fid, dims(rho0), size(tspan));
+    fclose(fid);
+    result = real(expect(n, rho));
 end
