@@ -24,6 +24,7 @@ names = [
     "wigner_operator",
     "wigner_state",
     "timeevolution_master",
+    "timeevolution_jaynescummings",
     "timeevolution_particle",
     "timeevolution_decelerating_particle",
     "timeevolution_timedependent"
