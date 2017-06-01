@@ -10,26 +10,25 @@ cutoffs = range(5, 56, 5)
 
 def setup(N):
     options = qt.Options()
-    options.num_cpus = 1
     options.atol = 1e-8
     options.rtol = 1e-6
     return options
 
 def f(N, options):
-    kap = 1.
-    eta = 4*kap
+    kappa = 1.
+    eta = 4*kappa
     delta = 0
-    tmax = 100
-    tsteps = 201
-    tlist = np.linspace(0, tmax, tsteps)
+    tspan = np.linspace(0, 100, 201)
 
     a = qt.destroy(N)
-    ad = a.dag()
-    H = delta*ad*a + eta*(a + ad)
-    c_ops = [np.sqrt(2*kap)*a]
+    at = qt.create(N)
+    n = at*a
+
+    H = delta*n + eta*(a + at)
+    c_ops = [np.sqrt(2*kappa)*a]
 
     psi0 = qt.basis(N, 0)
-    n = qt.mesolve(H, psi0, tlist, c_ops, [ad*a], options=options).expect[0]
+    n = qt.mesolve(H, psi0, tspan, c_ops, [n], options=options).expect[0]
     return n
 
 print("Benchmarking:", name)
@@ -45,4 +44,4 @@ for N in cutoffs:
 print()
 
 benchmarkutils.check(name, checks)
-benchmarkutils.save(name, results)
+# benchmarkutils.save(name, results)
