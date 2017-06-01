@@ -1,15 +1,19 @@
 
-function result = bench_multiplication_dense_dense()
+function results = bench_multiplication_dense_dense()
     name = 'multiplication_dense_dense';
     cutoffs = [50:50:1001];
-    result = [];
+    results = [];
     for N = cutoffs
-        op1 = (1.+0.3j)*rand(N, N);
-        op2 = (1.+0.3j)*rand(N, N);
+        [op1, op2] = setup(N);
         f_ = @() f(op1, op2);
-        result = [result, timeit(f_)];
+        results = [results, timeit(f_)];
     end
-    savebenchmark(name, cutoffs, result)
+    savebenchmark(name, cutoffs, results)
+end
+
+function [op1, op2] = setup(N)
+    op1 = (1.+0.3j)*rand(N, N);
+    op2 = (1.+0.3j)*rand(N, N);
 end
 
 function result = f(op1, op2)
