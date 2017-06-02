@@ -6,38 +6,37 @@ name = "timeevolution_timedependent"
 
 samples = 3
 evals = 1
-cutoffs = range(10, 101, 10)
+cutoffs = range(10, 51, 10)
+
 
 def setup(N):
     options = qt.Options()
-    options.num_cpus = 1
     options.nsteps = 1000000
     options.atol = 1e-8
     options.rtol = 1e-6
     return options
 
+
 def f(N, options):
-    omega = 1.89  # Frequency of driving laser
-    omega_c = 2.13  # Cavity frequency
-    eta = 0.76  # Pump strength
-    kappa = 0.34  # Decay rate
+    kappa = 1.
+    eta = 1.5
+    wc = 1.8
+    wl = 2.
+    # delta_c = wl - wc
+    alpha0 = 0.3 - 0.5j
+    tspan = np.linspace(0, 10, 11)
 
     a = qt.destroy(N)
     at = qt.create(N)
     n = qt.num(N)
 
-    J = [np.sqrt(kappa)*a]
-
-    # Initial state
-    alpha0 = 0.3 - 0.5j
+    J = [np.sqrt(kappa) * a]
     psi0 = qt.coherent(N, alpha0)
-
-    tlist = np.linspace(0, 10., 11)
-    H = [omega_c*n,
-            [eta*a, lambda t, args: np.exp(1j*omega*t)],
-            [eta*at, lambda t, args: np.exp(-1j*omega*t)]]
-    alpha_t = np.real(qt.mesolve(H, psi0, tlist, J, [a], options=options).expect[0])
-    return alpha_t
+    H = [wc * n,
+            [eta * a, lambda t, args: np.exp(1j * wl * t)],
+            [eta * at, lambda t, args: np.exp(-1j * wl * t)]]
+    alpha_t = qt.mesolve(H, psi0, tspan, J, [a], options=options).expect[0]
+    return np.real(alpha_t)
 
 
 print("Benchmarking:", name)

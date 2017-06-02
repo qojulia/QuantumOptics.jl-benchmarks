@@ -5,8 +5,9 @@ import benchmarkutils
 name = "timeevolution_master"
 
 samples = 3
-evals = 1
-cutoffs = range(5, 56, 5)
+evals = 3
+cutoffs = range(10, 101, 10)
+
 
 def setup(N):
     options = qt.Options()
@@ -14,22 +15,27 @@ def setup(N):
     options.rtol = 1e-6
     return options
 
+
 def f(N, options):
     kappa = 1.
-    eta = 4*kappa
-    delta = 0
-    tspan = np.linspace(0, 100, 201)
+    eta = 1.5
+    wc = 1.8
+    wl = 2.
+    delta_c = wl - wc
+    alpha0 = 0.3 - 0.5j
+    tspan = np.linspace(0, 10, 11)
 
     a = qt.destroy(N)
     at = qt.create(N)
-    n = at*a
+    n = at * a
 
-    H = delta*n + eta*(a + at)
-    c_ops = [np.sqrt(2*kappa)*a]
+    H = delta_c*n + eta*(a + at)
+    J = [np.sqrt(kappa) * a]
 
-    psi0 = qt.basis(N, 0)
-    n = qt.mesolve(H, psi0, tspan, c_ops, [n], options=options).expect[0]
-    return n
+    psi0 = qt.coherent(N, alpha0)
+    exp_n = qt.mesolve(H, psi0, tspan, J, [n], options=options).expect[0]
+    return np.real(exp_n)
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
@@ -44,4 +50,4 @@ for N in cutoffs:
 print()
 
 benchmarkutils.check(name, checks)
-# benchmarkutils.save(name, results)
+benchmarkutils.save(name, results)

@@ -6,39 +6,38 @@ name = "timeevolution_timedependent"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:160;]
+cutoffs = [10:10:100;]
 
 function setup(N)
     nothing
 end
 
 function f(N)
-    ω = 1.89 # Frequency of driving laser
-    ωc = 2.13 # Cavity frequency
-    η = 0.76 # Pump strength
-    κ = 0.34 # Decay rate
-    δc = ωc - ω # Detuning
+    κ = 1.
+    η = 1.5
+    ωc = 1.8
+    ωl = 2.
+    Δc = ωl - ωc
+    α0 = 0.3 - 0.5im
+    tspan = [0:1.:10;]
 
     b = FockBasis(N-1)
     a = destroy(b)
     at = create(b)
     n = number(b)
 
-    Γ = Matrix{Float64}(1,1)
-    Γ[1,1] = κ
+    H = Δc*at*a + η*(a + at)
     J = [a]
     Jdagger = [at]
+    rates = [κ]
 
-    # Initial state
-    α0 = 0.3 - 0.5im
-    psi0 = coherentstate(b, α0)
+    Ψ0 = coherentstate(b, α0)
 
-    T = [0:1.:10;]
     αt = Float64[]
     fout(t, rho) = push!(αt, real(expect(a, rho)))
-    H(t, n, a, at) = ωc*n + η*(a*exp(1im*ω*t) + at*exp(-1im*ω*t))
+    H(t, n, a, at) = ωc*n + η*(a*exp(1im*ωl*t) + at*exp(-1im*ωl*t))
     HJ(t::Float64, rho::DenseOperator) = (H(t, n, a, at), J, Jdagger)
-    timeevolution.master_dynamic(T, psi0, HJ; Gamma=Γ, fout=fout, reltol=1e-6, abstol=1e-8)
+    timeevolution.master_dynamic(tspan, Ψ0, HJ; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
     αt
 end
 

@@ -6,7 +6,7 @@ name = "timeevolution_master"
 
 samples = 3
 evals = 1
-cutoffs = [5:5:55;]
+cutoffs = [10:10:100;]
 
 function setup(N)
     nothing
@@ -14,23 +14,26 @@ end
 
 function f(N)
     κ = 1.
-    η = 4κ
-    Δ = 0
-    tspan = [0:0.5:100;]
+    η = 1.5
+    ωc = 1.8
+    ωl = 2.
+    Δc = ωl - ωc
+    α0 = 0.3 - 0.5im
+    tspan = [0:1.:10;]
 
     b = FockBasis(N-1)
     a = destroy(b)
-    ad = dagger(a)
+    at = create(b)
     n = number(b)
-    H = Δ*ad*a + η*(a + ad)
-    J = [a]
-    rates = [2κ]
 
-    Ψ₀ = fockstate(b, 0)
-    ρ₀ = Ψ₀ ⊗ dagger(Ψ₀)
+    H = Δc*at*a + η*(a + at)
+    J = [a]
+    rates = [κ]
+
+    Ψ₀ = coherentstate(b, α0)
     exp_n = Float64[]
     fout(t, ρ) = push!(exp_n, real(expect(n, ρ)))
-    timeevolution.master(tspan, ρ₀, H, J; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
+    timeevolution.master(tspan, Ψ₀, H, J; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
     exp_n
 end
 
