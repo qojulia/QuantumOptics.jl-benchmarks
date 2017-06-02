@@ -24,9 +24,9 @@ function setup(N)
 end
 
 function f(psi0, H, x, J)
-    T = [0:1.:10;]
+    T = [0:1:10;]
     exp_x = Float64[]
-    fout(t, psi) = push!(exp_x, real(expect(x, psi)))
+    fout(t, rho) = push!(exp_x, real(expect(x, rho)))
     timeevolution.master(T, psi0, H, J; fout=fout, reltol=1e-6, abstol=1e-8)
     exp_x
 end
