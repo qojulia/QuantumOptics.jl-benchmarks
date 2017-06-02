@@ -1,13 +1,17 @@
 
 function result = bench_ptrace()
     name = 'ptrace';
-    cutoffs = [2:10];
+    cutoffs = [2:9];
+    checks = [];
     result = [];
     for N = cutoffs
         op = create_operator(N);
         f_ = @() f(op);
+        y = f_();
+        checks = [checks, sumabs(y.data)];
         result = [result, timeit(f_)];
     end
+    checkbenchmark(name, cutoffs, checks, 1e-5)
     savebenchmark(name, 4*cutoffs.^2, result)
 end
 

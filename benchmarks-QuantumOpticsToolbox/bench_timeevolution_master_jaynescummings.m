@@ -1,12 +1,15 @@
 
 function result = bench_timeevolution_master_jaynescummings()
     name = 'timeevolution_master_jaynescummings';
-    cutoffs = [10:10:50];
+    cutoffs = [10:10:40];
+    checks = [];
     result = [];
     for N = cutoffs
         f_ = @() f(N);
+        checks = [checks, sum(f_())];
         result = [result, timeit(f_)];
     end
+    checkbenchmark(name, cutoffs, checks, 1e-5)
     savebenchmark(name, cutoffs, result)
 end
 

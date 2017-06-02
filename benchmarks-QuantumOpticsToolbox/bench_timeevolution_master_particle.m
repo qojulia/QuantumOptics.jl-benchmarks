@@ -2,13 +2,15 @@
 function result = bench_timeevolution_master_particle()
     name = 'timeevolution_master_particle';
     cutoffs = 10:10:31;
+    checks = [];
     result = [];
     for N = cutoffs
         [rho0, L, x] = setup(N);
         f_ = @() f(rho0, L, x);
-        check = f_();
+        checks = [checks, sum(f_())];
         result = [result, timeit(f_)];
     end
+    checkbenchmark(name, cutoffs, checks, 1e-5)
     savebenchmark(name, cutoffs, result)
 end
 
@@ -51,20 +53,20 @@ function [rho0, L, x] = setup(N)
     % Create gaussian state
     alpha = 1./(pi^(1/4)*sqrt(sigma0))*sqrt(dx);
     data = alpha*exp(1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0).^2/(2*sigma0^2));
-    psi0 = qo(data);
+    psi0 = qo(data.');
     C = (x + 1j*p);
     LH = -1i * (spre(H) - spost(H));
     L1 = spre(C)*spost(C')-0.5*spre(C'*C)-0.5*spost(C'*C);
     L = LH+L1;
 
-    rho0 = psi0' * psi0;
+    rho0 = psi0 * psi0';
 end
 
 function result = f(rho0, L, x)
     % Set up options, if required
     options.reltol = 1e-6;
     options.abstol = 1e-8;
-    tlist = linspace(0, 5, 6);
+    tlist = linspace(0, 10, 11);
     ode2file('file1.dat', L, rho0, tlist, options);
     % Call the equation solver
     odesolve('file1.dat','file2.dat');
@@ -72,5 +74,5 @@ function result = f(rho0, L, x)
     fid = fopen('file2.dat','rb');
     rho = qoread(fid, dims(rho0), size(tlist));
     fclose(fid);
-    result = real(expect(x, rho{6}));
+    result = real(expect(x, rho));
 end
