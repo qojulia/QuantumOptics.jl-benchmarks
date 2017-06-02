@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "timeevolution_master"
+name = "timeevolution_master_timedependent_cavity"
 
 samples = 3
 evals = 1
@@ -28,22 +28,27 @@ function f(N)
 
     H = Δc*at*a + η*(a + at)
     J = [a]
+    Jdagger = [at]
     rates = [κ]
 
-    Ψ₀ = coherentstate(b, α0)
-    exp_n = Float64[]
-    fout(t, ρ) = push!(exp_n, real(expect(n, ρ)))
-    timeevolution.master(tspan, Ψ₀, H, J; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
-    exp_n
+    Ψ0 = coherentstate(b, α0)
+
+    αt = Float64[]
+    fout(t, rho) = push!(αt, real(expect(a, rho)))
+    H(t, n, a, at) = ωc*n + η*(a*exp(1im*ωl*t) + at*exp(-1im*ωl*t))
+    HJ(t::Float64, rho::DenseOperator) = (H(t, n, a, at), J, Jdagger)
+    timeevolution.master_dynamic(tspan, Ψ0, HJ; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
+    αt
 end
 
 println("Benchmarking: ", name)
 print("Cutoff: ")
+
 checks = Dict{Int, Float64}()
 results = []
 for N in cutoffs
     print(N, " ")
-    checks[N] = abs(sum(f(N)))
+    checks[N] = sum(f(N))
     t = @belapsed f($N) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end

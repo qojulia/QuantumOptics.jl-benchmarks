@@ -1,6 +1,6 @@
 
-function result = bench_timeevolution_master()
-    name = 'timeevolution_master';
+function result = bench_timeevolution_master_cavity()
+    name = 'timeevolution_master_cavity';
     cutoffs = [5:5:40];
     result = [];
     for N = cutoffs
@@ -19,17 +19,17 @@ function f(Ncutoff)
     a = destroy(Ncutoff);
     at = create(Ncutoff);
     n = at*a;
-    
+
     H = delta*n + eta*(a + at);
     C = sqrt(2*kappa)*a;
-    LH = -1i * (spre(H) - spost(H)); 
+    LH = -1i * (spre(H) - spost(H));
     L1 = spre(C)*spost(C')-0.5*spre(C'*C)-0.5*spost(C'*C);
     L = LH+L1;
 
 
     psi0 = basis(Ncutoff, 1);
     rho0 = psi0 * psi0';
-    
+
     % Set up options, if required
     options.reltol = 1e-6;
     options.abstol = 1e-8;

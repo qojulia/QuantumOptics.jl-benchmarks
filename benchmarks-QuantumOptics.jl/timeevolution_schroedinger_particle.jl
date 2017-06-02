@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "timeevolution_particle[fft]"
+name = "timeevolution_schroedinger_particle"
 
 samples = 3
 evals = 1
@@ -15,12 +15,9 @@ function setup(N)
     p0 = 1
     sigma0 = 1
     bx = PositionBasis(xmin, xmax, N)
-    bp = MomentumBasis(bx)
     x = position(bx)
-    p = momentum(bp)
-    Tpx = FFTOperator(bp, bx)
-    Txp = dagger(Tpx)
-    H = LazySum(LazyProduct(Txp, p^2, Tpx), 2*x^2)
+    p = momentum(bx)
+    H = p^2 + full(2*x^2)
     psi0 = gaussianstate(bx, x0, p0, sigma0)
     psi0, H, x
 end

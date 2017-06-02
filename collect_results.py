@@ -23,11 +23,11 @@ names = [
     "qfunc_state",
     "wigner_operator",
     "wigner_state",
-    "timeevolution_master",
-    "timeevolution_jaynescummings",
-    "timeevolution_particle",
-    "timeevolution_decelerating_particle",
-    "timeevolution_timedependent"
+    "timeevolution_master_cavity",
+    "timeevolution_master_jaynescummings",
+    "timeevolution_master_particle",
+    "timeevolution_master_timedependent_cavity",
+    "timeevolution_schroedinger_particle",
 ]
 
 filenames = os.listdir("results")

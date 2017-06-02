@@ -1,6 +1,6 @@
 
-function result = bench_timeevolution_decelerating_particle()
-    name = 'timeevolution_decelerating_particle';
+function result = bench_timeevolution_master_particle()
+    name = 'timeevolution_master_particle';
     cutoffs = 5:5:35;
     result = [];
     for N = cutoffs

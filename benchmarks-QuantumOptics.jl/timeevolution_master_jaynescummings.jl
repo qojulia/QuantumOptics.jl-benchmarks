@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "timeevolution_jaynescummings"
+name = "timeevolution_master_jaynescummings"
 
 samples = 3
 evals = 3

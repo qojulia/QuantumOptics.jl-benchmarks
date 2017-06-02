@@ -2,7 +2,7 @@ import qutip as qt
 import numpy as np
 import benchmarkutils
 
-name = "timeevolution_particle"
+name = "timeevolution_schroedinger_particle"
 
 samples = 3
 evals = 1
@@ -43,7 +43,6 @@ def setup(N):
     psi0 = gaussianstate(2., 1., 1.)
 
     options = qt.Options()
-    options.num_cpus = 1
     options.nsteps = 1000000
     options.atol = 1e-8
     options.rtol = 1e-6

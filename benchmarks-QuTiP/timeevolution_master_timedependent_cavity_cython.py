@@ -2,7 +2,7 @@ import qutip as qt
 import numpy as np
 import benchmarkutils
 
-name = "timeevolution_timedependent[cython]"
+name = "timeevolution_master_timedependent_cavity[cython]"
 
 samples = 3
 evals = 1
