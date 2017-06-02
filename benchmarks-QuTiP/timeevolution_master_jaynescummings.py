@@ -8,11 +8,13 @@ samples = 3
 evals = 3
 cutoffs = range(10, 81, 10)
 
+
 def setup(N):
     options = qt.Options()
     options.atol = 1e-8
     options.rtol = 1e-6
     return options
+
 
 def f(N, options):
     wa = 1
@@ -28,7 +30,7 @@ def f(N, options):
 
     a = qt.destroy(N)
     at = qt.create(N)
-    n = at*a
+    n = at * a
 
     sm = qt.sigmam()
     sp = qt.sigmap()
@@ -44,6 +46,7 @@ def f(N, options):
     psi0 = qt.tensor(qt.fock(N, 0), (qt.basis(2, 0) + qt.basis(2, 1)).unit())
     exp_n = qt.mesolve(H, psi0, tspan, c_ops, [qt.tensor(n, Ia)], options=options).expect[0]
     return exp_n
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)

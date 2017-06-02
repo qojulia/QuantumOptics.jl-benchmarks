@@ -50,7 +50,7 @@ checks = Dict{Int, Float64}()
 results = []
 for N in cutoffs
     print(N, " ")
-    checks[N] = abs(sum(f(N)))
+    checks[N] = sum(f(N))
     t = @belapsed f($N) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end

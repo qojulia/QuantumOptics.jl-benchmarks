@@ -6,18 +6,19 @@ name = "timeevolution_schroedinger_particle"
 
 samples = 3
 evals = 1
-cutoffs = range(50, 451, 50)
+cutoffs = range(50, 201, 50)
+
 
 def setup(N):
-    xmin = -10
-    xmax = 10
-    x0 = 2
-    p0 = 1
+    xmin = -5
+    xmax = 5
+    x0 = 0.3
+    p0 = -0.2
     sigma0 = 1
-    dx = (xmax - xmin)/N
-    pmin = -np.pi/dx
-    pmax = np.pi/dx
-    dp = (pmax - pmin)/N
+    dx = (xmax - xmin) / N
+    pmin = -np.pi / dx
+    pmax = np.pi / dx
+    dp = (pmax - pmin) / N
 
     samplepoints_x = np.linspace(xmin, xmax, N, endpoint=False)
     samplepoints_p = np.linspace(pmin, pmax, N, endpoint=False)
@@ -29,18 +30,18 @@ def setup(N):
 
     a = np.zeros([N, N], dtype=complex)
     for i in range(N):
-        a[i, i:] = row0[:N-i]
-        a[i:, i] = col0[:N-i]
+        a[i, i:] = row0[:N - i]
+        a[i:, i] = col0[:N - i]
     p = qt.Qobj(a)
 
-    H = p**2 + 2*x**2
+    H = p**2 + 2 * x**2
 
     def gaussianstate(x0, p0, sigma0):
         alpha = 1./(np.pi**(1/4)*np.sqrt(sigma0))*np.sqrt(dx)
         data = alpha*np.exp(1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0)**2/(2*sigma0**2))
         return qt.Qobj(data)
 
-    psi0 = gaussianstate(2., 1., 1.)
+    psi0 = gaussianstate(x0, p0, sigma0)
 
     options = qt.Options()
     options.nsteps = 1000000
@@ -49,10 +50,12 @@ def setup(N):
 
     return psi0, H, x, options
 
+
 def f(psi0, H, x, options):
     tlist = np.linspace(0, 10, 11)
     exp_x = qt.mesolve(H, psi0, tlist, [], [x], options=options).expect[0]
     return exp_x
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)

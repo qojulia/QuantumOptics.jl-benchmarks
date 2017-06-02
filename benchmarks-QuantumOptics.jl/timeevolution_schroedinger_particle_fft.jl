@@ -6,13 +6,13 @@ name = "timeevolution_schroedinger_particle[fft]"
 
 samples = 3
 evals = 1
-cutoffs = [50:50:450;]
+cutoffs = [50:50:200;]
 
 function setup(N)
-    xmin = -10
-    xmax = 10
-    x0 = 2
-    p0 = 1
+    xmin = -5
+    xmax = 5
+    x0 = 0.3
+    p0 = -0.2
     sigma0 = 1
     bx = PositionBasis(xmin, xmax, N)
     bp = MomentumBasis(bx)
@@ -40,7 +40,7 @@ results = []
 for N in cutoffs
     print(N, " ")
     psi0, H, x = setup(N)
-    checks[N] = abs(sum(f(psi0, H, x)))
+    checks[N] = sum(f(psi0, H, x))
     t = @belapsed f($psi0, $H, $x) samples=samples evals=evals
     push!(results, Dict("N"=>N, "t"=>t))
 end

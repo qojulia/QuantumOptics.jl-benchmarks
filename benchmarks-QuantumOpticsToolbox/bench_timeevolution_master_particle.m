@@ -1,7 +1,7 @@
 
 function result = bench_timeevolution_master_particle()
     name = 'timeevolution_master_particle';
-    cutoffs = 5:5:35;
+    cutoffs = 10:10:31;
     result = [];
     for N = cutoffs
         [rho0, L, x] = setup(N);
@@ -50,7 +50,7 @@ function [rho0, L, x] = setup(N)
 
     % Create gaussian state
     alpha = 1./(pi^(1/4)*sqrt(sigma0))*sqrt(dx);
-    data = alpha*exp(-1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0).^2/(2*sigma0^2));
+    data = alpha*exp(1j*p0*(samplepoints_x-x0/2) - (samplepoints_x-x0).^2/(2*sigma0^2));
     psi0 = qo(data);
     C = (x + 1j*p);
     LH = -1i * (spre(H) - spost(H));

@@ -6,7 +6,8 @@ name = "timeevolution_master_particle"
 
 samples = 3
 evals = 1
-cutoffs = range(5, 46, 5)
+cutoffs = range(10, 41, 10)
+
 
 def setup(N):
     xmin = -5
@@ -14,10 +15,10 @@ def setup(N):
     x0 = 0.3
     p0 = -0.2
     sigma0 = 1
-    dx = (xmax - xmin)/N
-    pmin = -np.pi/dx
-    pmax = np.pi/dx
-    dp = (pmax - pmin)/N
+    dx = (xmax - xmin) / N
+    pmin = -np.pi / dx
+    pmax = np.pi / dx
+    dp = (pmax - pmin) / N
 
     samplepoints_x = np.linspace(xmin, xmax, N, endpoint=False)
     samplepoints_p = np.linspace(pmin, pmax, N, endpoint=False)
@@ -29,11 +30,11 @@ def setup(N):
 
     a = np.zeros([N, N], dtype=complex)
     for i in range(N):
-        a[i, i:] = row0[:N-i]
-        a[i:, i] = col0[:N-i]
+        a[i, i:] = row0[:N - i]
+        a[i:, i] = col0[:N - i]
     p = qt.Qobj(a)
 
-    H = p**2 + 2*x**2
+    H = p**2 + 2 * x**2
 
     def gaussianstate(x0, p0, sigma0):
         alpha = 1./(np.pi**(1/4)*np.sqrt(sigma0))*np.sqrt(dx)
@@ -41,7 +42,7 @@ def setup(N):
         return qt.Qobj(data)
 
     psi0 = gaussianstate(x0, p0, sigma0)
-    J = [x + 1j*p]
+    J = [x + 1j * p]
 
     options = qt.Options()
     options.nsteps = 1000000
@@ -50,10 +51,12 @@ def setup(N):
 
     return psi0, H, x, J, options
 
+
 def f(psi0, H, x, J, options):
-    tlist = np.linspace(0, 5, 6)
+    tlist = np.linspace(0, 10, 11)
     exp_x = qt.mesolve(H, psi0, tlist, J, [x], options=options).expect[0]
     return exp_x
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)

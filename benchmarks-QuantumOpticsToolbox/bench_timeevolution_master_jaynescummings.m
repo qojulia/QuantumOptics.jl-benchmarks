@@ -1,7 +1,7 @@
 
 function result = bench_timeevolution_master_jaynescummings()
     name = 'timeevolution_master_jaynescummings';
-    cutoffs = [10:10:60];
+    cutoffs = [10:10:50];
     result = [];
     for N = cutoffs
         f_ = @() f(N);
