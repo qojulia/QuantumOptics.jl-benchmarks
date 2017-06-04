@@ -30,6 +30,7 @@ names = [
     "timeevolution_master_timedependent_jaynescummings",
     "timeevolution_master_timedependent_particle",
     "timeevolution_schroedinger_cavity",
+    "timeevolution_schroedinger_jaynescummings",
     "timeevolution_schroedinger_particle",
 ]
 
