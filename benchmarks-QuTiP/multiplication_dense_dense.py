@@ -7,13 +7,16 @@ samples = 2
 evals = 5
 cutoffs = range(50, 601, 50)
 
+
 def setup(N):
-    op1 = sp.rand(N, N, 1., dtype=float)*0.2j
-    op2 = sp.rand(N, N, 1., dtype=float)*0.1j
+    op1 = sp.rand(N, N, 1., dtype=float) * 0.2j
+    op2 = sp.rand(N, N, 1., dtype=float) * 0.1j
     return op1, op2
 
+
 def f(op1, op2):
-    return op1*op2
+    return op1 * op2
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
