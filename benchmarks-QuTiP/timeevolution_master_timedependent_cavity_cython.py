@@ -34,7 +34,7 @@ def f(N, options):
     psi0 = qt.coherent(N, alpha0)
     H = [wc * n,
             [eta * a, 'exp(1j*{wl}*t)'.format(wl=wl)],
-            [eta * at, 'np.exp(-1j*{wl}*t)'.format(wl=wl)]]
+            [eta * at, 'exp(-1j*{wl}*t)'.format(wl=wl)]]
     alpha_t = qt.mesolve(H, psi0, tspan, J, [a], options=options).expect[0]
     return np.real(alpha_t)
 
