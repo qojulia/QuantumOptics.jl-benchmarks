@@ -2,6 +2,16 @@ import os
 import json
 
 names = [
+    "addition_sparse_sparse_01",
+    "addition_sparse_sparse_001",
+    "addition_sparse_sparse_0001",
+    "addition_sparse_dense_01",
+    "addition_sparse_dense_001",
+    "addition_sparse_dense_0001",
+    "addition_dense_sparse_01",
+    "addition_dense_sparse_001",
+    "addition_dense_sparse_0001",
+    "addition_dense_dense",
     "multiplication_sparse_sparse_01",
     "multiplication_sparse_sparse_001",
     "multiplication_sparse_sparse_0001",
