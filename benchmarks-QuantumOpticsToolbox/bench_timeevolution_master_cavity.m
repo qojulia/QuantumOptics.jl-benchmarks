@@ -6,7 +6,7 @@ function result = bench_timeevolution_master_cavity()
     result = [];
     for N = cutoffs
         f_ = @() f(N);
-        checks = [checks, sum(f_)];
+        checks = [checks, sum(f_())];
         result = [result, timeit(f_)];
     end
     checkbenchmark(name, cutoffs, checks, 1e-5)
