@@ -40,7 +40,7 @@ function f(N)
 
     exp_n = Float64[]
     fout(t, ρ) = push!(exp_n, real(expect(1, n, ρ)))
-    timeevolution.master(tspan, ψ₀, H, J; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
+    timeevolution.master(tspan, ψ₀, H, J; rates=rates, fout=fout, reltol=1e-6, abstol=1e-8)
     exp_n
 end
 

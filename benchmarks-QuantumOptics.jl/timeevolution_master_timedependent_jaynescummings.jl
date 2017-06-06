@@ -43,7 +43,7 @@ function f(N)
     H(t, rho) = (exp(-1im*Δ*t)*Ha + exp(1im*Δ*t)*Hb, J, Jdagger)
     exp_asp = Float64[]
     fout(t, ρ) = push!(exp_asp, real(expect(a⊗sp, ρ)))
-    timeevolution.master_dynamic(tspan, ψ₀, H; Gamma=rates, fout=fout, reltol=1e-6, abstol=1e-8)
+    timeevolution.master_dynamic(tspan, ψ₀, H; rates=rates, fout=fout, reltol=1e-6, abstol=1e-8)
     exp_asp
 end
 
