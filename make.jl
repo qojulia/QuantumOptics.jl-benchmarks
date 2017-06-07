@@ -1,8 +1,8 @@
 website = "../QuantumOptics.jl-website"
 @assert isdir(website)
 
-run(`python collect_results.py`)
-run(`python extract_code.py`)
+run(`python3 collect_results.py`)
+run(`python3 extract_code.py`)
 
 sourcecode_in = "sourcecode"
 sourcecode_out = joinpath(website, "src/_benchmarks-sourcecode/")

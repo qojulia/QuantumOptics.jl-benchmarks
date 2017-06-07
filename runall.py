@@ -5,7 +5,7 @@ matlabbenchmarks = "benchmarks-QuantumOpticsToolbox"
 juliabenchmarks = "benchmarks-QuantumOptics.jl"
 pythonbenchmarks = "benchmarks-QuTiP"
 
-subprocess.run(["python", "hardware_specs.py"], check=True)
+subprocess.run(["python3", "hardware_specs.py"], check=True)
 
 os.chdir(juliabenchmarks)
 filenames = os.listdir(".")
