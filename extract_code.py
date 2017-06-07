@@ -92,7 +92,7 @@ def testjulia(name):
 
 def testpython(name):
     outputpath = os.path.join(outputdir, name)
-    subprocess.run(["python", outputpath], check=True)
+    subprocess.run(["python3", outputpath], check=True)
 
 # Extract QuantumOptics.jl source code
 filenames = os.listdir(juliabenchmarks)
