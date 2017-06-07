@@ -5,8 +5,8 @@ import benchmarkutils
 name = "timeevolution_master_timedependent_jaynescummings"
 
 samples = 3
-evals = 3
-cutoffs = range(10, 31, 10)
+evals = 6
+cutoffs = range(5, 81, 5)
 
 
 def setup(N):

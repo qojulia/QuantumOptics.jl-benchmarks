@@ -5,8 +5,8 @@ include("benchmarkutils.jl")
 name = "timeevolution_master_particle"
 
 samples = 3
-evals = 1
-cutoffs = [10:10:60;]
+evals = 3
+cutoffs = [5:5:60;]
 
 function setup(N)
     xmin = -5

@@ -6,7 +6,7 @@ name = "timeevolution_master_timedependent_jaynescummings[cython]"
 
 samples = 3
 evals = 3
-cutoffs = range(10, 31, 10)
+cutoffs = range(5, 81, 5)
 
 
 def setup(N):

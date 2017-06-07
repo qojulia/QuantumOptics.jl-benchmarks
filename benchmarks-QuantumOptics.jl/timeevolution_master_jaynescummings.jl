@@ -6,7 +6,7 @@ name = "timeevolution_master_jaynescummings"
 
 samples = 3
 evals = 3
-cutoffs = [10:10:80;]
+cutoffs = [5:5:80;]
 
 function setup(N)
     nothing

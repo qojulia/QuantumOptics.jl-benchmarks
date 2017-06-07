@@ -1,7 +1,7 @@
 
 function result = bench_timeevolution_master_cavity()
     name = 'timeevolution_master_cavity';
-    cutoffs = 10:10:30;
+    cutoffs = 10:10:60;
     checks = [];
     result = [];
     for N = cutoffs

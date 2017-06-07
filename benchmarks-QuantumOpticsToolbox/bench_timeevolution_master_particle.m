@@ -1,7 +1,7 @@
 
 function result = bench_timeevolution_master_particle()
     name = 'timeevolution_master_particle';
-    cutoffs = 10:10:31;
+    cutoffs = 5:5:30;
     checks = [];
     result = [];
     for N = cutoffs
