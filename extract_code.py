@@ -102,7 +102,7 @@ for name in filenames:
     print("Extract: ", name)
     sourcecode = extract_julia(os.path.join(juliabenchmarks, name))
     write(name, sourcecode)
-    testjulia(name)
+    # testjulia(name)
 
 
 # Extract QuTiP source code
@@ -113,4 +113,4 @@ for name in filenames:
     print("Extract: ", name)
     sourcecode = extract_python(os.path.join(pythonbenchmarks, name))
     write(name, sourcecode)
-    testpython(name)
+    # testpython(name)
