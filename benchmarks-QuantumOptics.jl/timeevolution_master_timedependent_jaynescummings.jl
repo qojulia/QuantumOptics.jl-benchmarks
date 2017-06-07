@@ -41,8 +41,9 @@ function f(N)
     ψ₀ = fockstate(b_cavity, 0) ⊗ normalize(spinup(b_atom) + spindown(b_atom))
 
     H(t, rho) = (exp(-1im*Δ*t)*Ha + exp(1im*Δ*t)*Hb, J, Jdagger)
+    asp = a⊗sp
     exp_asp = Float64[]
-    fout(t, ρ) = push!(exp_asp, real(expect(a⊗sp, ρ)))
+    fout(t, ρ) = push!(exp_asp, real(expect(asp, ρ)))
     timeevolution.master_dynamic(tspan, ψ₀, H; rates=rates, fout=fout, reltol=1e-6, abstol=1e-8)
     exp_asp
 end
