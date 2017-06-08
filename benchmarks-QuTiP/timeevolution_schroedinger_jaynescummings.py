@@ -48,7 +48,7 @@ for N in cutoffs:
     print(N, "", end="", flush=True)
     options = setup(N)
     checks[N] = sum(f(N, options))
-    t = benchmarkutils.run_benchmark(f, N, options, samples=samples, evals=evals)
+    t = benchmarkutils.run_benchmark(f, 2*N, options, samples=samples, evals=evals)
     results.append({"N": N, "t": t})
 print()
 

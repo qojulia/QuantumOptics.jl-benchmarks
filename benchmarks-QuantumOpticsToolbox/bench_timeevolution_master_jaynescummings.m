@@ -10,7 +10,7 @@ function result = bench_timeevolution_master_jaynescummings()
         result = [result, timeit(f_)];
     end
     checkbenchmark(name, cutoffs, checks, 1e-5)
-    savebenchmark(name, cutoffs, result)
+    savebenchmark(name, 2*cutoffs, result)
 end
 
 function result = f(Ncutoff)

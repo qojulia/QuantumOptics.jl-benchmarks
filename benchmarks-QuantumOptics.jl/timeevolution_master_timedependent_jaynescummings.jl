@@ -55,7 +55,7 @@ for N in cutoffs
     print(N, " ")
     checks[N] = sum(f(N))
     t = @belapsed f($N) samples=samples evals=evals
-    push!(results, Dict("N"=>N, "t"=>t))
+    push!(results, Dict("N"=>2*N, "t"=>t))
 end
 println()
 
