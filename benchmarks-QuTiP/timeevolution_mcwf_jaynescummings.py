@@ -58,7 +58,7 @@ for N in cutoffs:
     options = setup(N)
     checks[N] = sum(f(N, options))
     t = benchmarkutils.run_benchmark(f, N, options, samples=samples, evals=1)
-    results.append({"N": N, "t": t / evals})
+    results.append({"N": 2*N, "t": t / evals})
 print()
 
 benchmarkutils.check(name, checks, eps=0.05)
