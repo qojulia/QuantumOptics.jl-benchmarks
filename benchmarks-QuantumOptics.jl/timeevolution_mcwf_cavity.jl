@@ -6,8 +6,8 @@ name = "timeevolution_mcwf_cavity"
 
 samples = 2
 evals = 100
-cutoffs = [10:10:50;]
-Ncheck = 50
+cutoffs = [50:50:500;]
+Ncheck = 200
 
 function setup(N)
     nothing
@@ -32,7 +32,7 @@ function f(N)
 
     Ψ₀ = coherentstate(b, α0)
     exp_n = Float64[]
-    fout(t, ψ) = push!(exp_n, real(expect(n, ψ)/norm(ψ)))
+    fout(t, ψ) = push!(exp_n, real(expect(n, ψ)/norm(ψ)^2))
     timeevolution.mcwf(tspan, Ψ₀, H, J; fout=fout, reltol=1e-6, abstol=1e-8)
     exp_n
 end
@@ -45,7 +45,7 @@ for N in cutoffs
     print(N, " ")
     C = 0.
     for i=1:Ncheck
-        C += abs(sum(f(N)))
+        C += sum(f(N))
     end
     checks[N] = C/Ncheck
     t = @belapsed f($N) samples=samples evals=evals
@@ -53,5 +53,5 @@ for N in cutoffs
 end
 println()
 
-benchmarkutils.check(name, checks)
+benchmarkutils.check(name, checks, 0.05)
 benchmarkutils.save(name, results)
