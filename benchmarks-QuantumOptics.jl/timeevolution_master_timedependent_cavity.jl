@@ -26,7 +26,6 @@ function f(N)
     at = create(b)
     n = number(b)
 
-    H = Δc*at*a + η*(a + at)
     J = [a]
     Jdagger = [at]
     rates = [κ]
