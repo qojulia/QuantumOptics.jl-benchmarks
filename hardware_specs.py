@@ -29,7 +29,7 @@ for line in juliainfo.split("\n"):
         juliaspecs.append(line.strip())
 
 print("Getting qutip specs ...")
-data = subprocess.check_output(["python", "-c", "import qutip; qutip.about()"])
+data = subprocess.check_output(["python3", "-c", "import qutip; qutip.about()"])
 qutipinfo = data.decode(sys.getdefaultencoding())
 qutipspecs = []
 specs["qutip"] = qutipspecs
