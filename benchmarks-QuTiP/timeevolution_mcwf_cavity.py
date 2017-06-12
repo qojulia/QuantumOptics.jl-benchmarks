@@ -6,7 +6,7 @@ name = "timeevolution_mcwf_cavity"
 
 samples = 2
 evals = 100
-cutoffs = range(50, 151, 50)
+cutoffs = range(50, 501, 50)
 
 
 def setup(N):

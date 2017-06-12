@@ -6,7 +6,7 @@ name = "timeevolution_mcwf_particle"
 
 samples = 2
 evals = 100
-cutoffs = [20:20:100;]
+cutoffs = [10:10:100;]
 Ncheck = 200
 
 function setup(N)

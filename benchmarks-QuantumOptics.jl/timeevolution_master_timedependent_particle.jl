@@ -6,7 +6,7 @@ name = "timeevolution_master_timedependent_particle"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:50;]
+cutoffs = [5:5:60;]
 
 function setup(N)
     xmin = -5

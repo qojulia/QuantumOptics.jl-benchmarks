@@ -6,7 +6,7 @@ name = "timeevolution_schroedinger_particle"
 
 samples = 3
 evals = 1
-cutoffs = range(50, 201, 50)
+cutoffs = range(25, 301, 25)
 
 
 def setup(N):

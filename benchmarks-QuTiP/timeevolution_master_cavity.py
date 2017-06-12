@@ -6,7 +6,7 @@ name = "timeevolution_master_cavity"
 
 samples = 3
 evals = 3
-cutoffs = range(10, 101, 10)
+cutoffs = range(10, 151, 10)
 
 
 def setup(N):

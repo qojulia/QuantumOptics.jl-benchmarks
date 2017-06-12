@@ -6,7 +6,7 @@ name = "timeevolution_mcwf_particle"
 
 samples = 2
 evals = 100
-cutoffs = range(20, 101, 20)
+cutoffs = range(10, 101, 10)
 
 
 def setup(N):

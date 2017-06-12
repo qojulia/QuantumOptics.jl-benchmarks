@@ -6,7 +6,7 @@ name = "timeevolution_schroedinger_jaynescummings"
 
 samples = 3
 evals = 3
-cutoffs = range(10, 81, 10)
+cutoffs = range(25, 251, 25)
 
 
 def setup(N):

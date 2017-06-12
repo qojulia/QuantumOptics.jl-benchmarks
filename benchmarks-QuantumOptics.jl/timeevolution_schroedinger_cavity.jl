@@ -6,7 +6,7 @@ name = "timeevolution_schroedinger_cavity"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:100;]
+cutoffs = [50:50:500;]
 
 function setup(N)
     nothing

@@ -6,7 +6,7 @@ name = "timeevolution_schroedinger_particle"
 
 samples = 3
 evals = 1
-cutoffs = [50:50:200;]
+cutoffs = [25:25:300;]
 
 function setup(N)
     xmin = -5

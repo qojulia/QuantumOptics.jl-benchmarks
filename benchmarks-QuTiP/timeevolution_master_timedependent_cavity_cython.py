@@ -6,7 +6,7 @@ name = "timeevolution_master_timedependent_cavity[cython]"
 
 samples = 3
 evals = 1
-cutoffs = range(10, 101, 10)
+cutoffs = range(10, 151, 10)
 
 
 def setup(N):

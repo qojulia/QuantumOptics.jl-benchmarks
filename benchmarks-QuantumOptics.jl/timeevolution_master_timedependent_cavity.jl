@@ -6,7 +6,7 @@ name = "timeevolution_master_timedependent_cavity"
 
 samples = 3
 evals = 1
-cutoffs = [10:10:100;]
+cutoffs = [10:10:150;]
 
 function setup(N)
     nothing
