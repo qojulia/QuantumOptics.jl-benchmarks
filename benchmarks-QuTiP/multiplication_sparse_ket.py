@@ -14,7 +14,7 @@ Nrand = 5
 def setup(N, s):
     data = sp.rand(N, N, s, dtype=float) * 0.2j
     op1 = qt.Qobj(data)
-    psi = qt.rand_ket(N)
+    psi = qt.rand_ket(N).full().ravel()
     return op1, psi
 
 

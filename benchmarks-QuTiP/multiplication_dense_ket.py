@@ -10,7 +10,7 @@ cutoffs = range(100, 1001, 100)
 
 def setup(N):
     op1 = qt.rand_dm(N, N) * 0.2j
-    psi = qt.rand_ket(N)
+    psi = qt.rand_ket(N).full().ravel()
     return op1, psi
 
 
