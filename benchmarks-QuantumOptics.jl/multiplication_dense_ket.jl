@@ -8,7 +8,7 @@ name = "multiplication_dense_ket"
 
 samples = 2
 evals = 5
-cutoffs = [100:100:1000;]
+cutoffs = [50:50:500;]
 
 function setup(N)
     b = GenericBasis(N)

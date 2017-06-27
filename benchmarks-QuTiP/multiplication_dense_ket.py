@@ -5,7 +5,7 @@ name = "multiplication_dense_ket"
 
 samples = 2
 evals = 5
-cutoffs = range(100, 1001, 100)
+cutoffs = range(50, 501, 50)
 
 
 def setup(N):
