@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-name = "ptrace"
+name = "ptrace_operator"
 
 samples = 5
 evals = 200
@@ -33,7 +33,7 @@ results = []
 for N in cutoffs
     print(N, " ")
     op = setup(N)
-    checks[N] = sum(abs(f(op).data))
+    checks[N] = sum(abs.(f(op).data))
     t = @belapsed f($op) samples=samples evals=evals
     push!(results, Dict("N"=>4*N^2, "t"=>t))
 end

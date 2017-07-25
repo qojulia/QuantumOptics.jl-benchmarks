@@ -2,16 +2,17 @@ import qutip as qt
 import numpy as np
 import benchmarkutils
 
-name = "ptrace"
+name = "ptrace_operator"
 
 samples = 5
 evals = 100
 cutoffs = range(2, 16)
 
+
 def setup(N):
     def create_suboperator(c0, alpha, N):
         x = np.linspace(0., 1., N**2)
-        data = (c0 + alpha*x).reshape(N, N)
+        data = (c0 + alpha * x).reshape(N, N)
         return qt.Qobj(data)
     op1 = create_suboperator(1, 0.2, N)
     op2 = create_suboperator(-2, 0.3, N)
@@ -20,8 +21,10 @@ def setup(N):
     op = qt.tensor(op1, op2, op3, op4)
     return op
 
+
 def f(op):
-    return qt.ptrace(op, [1, 2])
+    return qt.ptrace(op, [0, 3])
+
 
 print("Benchmarking:", name)
 print("Cutoff: ", end="", flush=True)
