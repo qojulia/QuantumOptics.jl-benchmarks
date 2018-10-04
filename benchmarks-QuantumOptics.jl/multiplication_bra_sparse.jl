@@ -1,8 +1,9 @@
 using QuantumOptics
 using BenchmarkTools
+using SparseArrays
 include("benchmarkutils.jl")
 
-srand(0)
+using Random; Random.seed!(0)
 
 basename = "multiplication_bra_sparse"
 
@@ -14,18 +15,18 @@ Nrand = 5
 
 function setup(N, s)
     b = GenericBasis(N)
-    op1 = SparseOperator(b, sprand(Complex128, N, N, s))
+    op1 = SparseOperator(b, sprand(ComplexF64, N, N, s))
     psi = dagger(randstate(b))
     result = copy(psi)
     op1, psi, result
 end
 
 function f(op1, psi, result)
-    operators.gemv!(Complex128(1., 0.), psi, op1, Complex128(0., 0.), result)
+    operators.gemv!(ComplexF64(1., 0.), psi, op1, ComplexF64(0., 0.), result)
 end
 
 for s in S
-    name = basename * "_" * replace(string(s), ".", "")
+    name = basename * "_" * replace(string(s), "." => "")
     println("Benchmarking: ", name)
     print("Cutoff: ")
     results = []

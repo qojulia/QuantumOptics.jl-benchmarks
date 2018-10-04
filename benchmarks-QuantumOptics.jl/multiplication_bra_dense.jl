@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-srand(0)
+using Random; Random.seed!(0)
 
 name = "multiplication_bra_dense"
 
@@ -19,7 +19,7 @@ function setup(N)
 end
 
 function f(op1, psi, result)
-    operators.gemv!(Complex128(1., 0.), psi, op1, Complex128(0., 0.), result)
+    operators.gemv!(ComplexF64(1., 0.), psi, op1, ComplexF64(0., 0.), result)
 end
 
 println("Benchmarking: ", name)

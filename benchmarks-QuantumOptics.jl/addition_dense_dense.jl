@@ -2,7 +2,7 @@ using QuantumOptics
 using BenchmarkTools
 include("benchmarkutils.jl")
 
-srand(0)
+using Random; Random.seed!(0)
 
 name = "addition_dense_dense"
 

@@ -19,7 +19,7 @@ for line in cpuinfo.split("\n"):
 
 
 print("Getting julia specs ...")
-data = subprocess.check_output(["julia", "-e", "versioninfo()"])
+data = subprocess.check_output(["julia", "-e", "import InteractiveUtils; InteractiveUtils.versioninfo()"])
 juliainfo = data.decode(sys.getdefaultencoding())
 juliaspecs = []
 specs["julia"] = juliaspecs

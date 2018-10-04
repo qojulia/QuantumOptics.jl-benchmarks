@@ -11,7 +11,7 @@ cutoffs = [2:18;]
 function setup(N)
     function create_substate(c0, alpha, N)
         b = GenericBasis(N)
-        data = c0 + alpha*complex(linspace(0., 1., N))
+        data = c0 .+ alpha*complex(range(0., stop=1., length=N))
         Ket(b, data)
     end
     psi1 = create_substate(1, 0.2, N)

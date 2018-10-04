@@ -11,7 +11,7 @@ cutoffs = [5000:5000:100000;]
 function setup(N)
     b = FockBasis(N-1)
     op = (destroy(b) + create(b))
-    psi = Ket(b, ones(Complex128, N)/sqrt(N))
+    psi = Ket(b, ones(ComplexF64, N)/sqrt(N))
     op, psi
 end
 
