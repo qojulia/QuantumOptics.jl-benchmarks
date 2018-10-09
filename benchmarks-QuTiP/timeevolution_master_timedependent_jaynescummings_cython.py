@@ -13,6 +13,7 @@ def setup(N):
     options = qt.Options()
     options.atol = 1e-8
     options.rtol = 1e-6
+    options.rhs_reuse = True
     return options
 
 

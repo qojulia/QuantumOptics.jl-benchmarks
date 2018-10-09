@@ -49,6 +49,7 @@ def setup(N):
     options.nsteps = 1000000
     options.atol = 1e-8
     options.rtol = 1e-6
+    options.rhs_reuse = True
 
     return psi0, Hkin, Vx, J, x, options
 
