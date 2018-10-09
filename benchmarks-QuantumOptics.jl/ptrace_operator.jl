@@ -11,7 +11,7 @@ cutoffs = [2:18;]
 function setup(N)
     function create_suboperator(c0, alpha, N)
         b = GenericBasis(N)
-        data = transpose(reshape(c0 + alpha*complex(range(0., stop=1., length=N^2)), N, N))
+        data = transpose(reshape(c0 .+ alpha.*complex(range(0., stop=1., length=N^2)), N, N))
         DenseOperator(b, data)
     end
     op1 = create_suboperator(1, 0.2, N)
