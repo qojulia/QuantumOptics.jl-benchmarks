@@ -25,7 +25,7 @@ function setup(N)
 end
 
 function f(psi0, H, x, J)
-    T = [0:1:10;]
+    T = [0.0:1.0:10;]
     exp_x = Float64[]
     fout(t, ψ) = push!(exp_x, real(expect(x, ψ)/norm(ψ)^2))
     timeevolution.mcwf(T, psi0, H, J; fout=fout, reltol=1e-6, abstol=1e-8)
