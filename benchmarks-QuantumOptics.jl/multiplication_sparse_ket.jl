@@ -22,7 +22,7 @@ function setup(N, s)
 end
 
 function f(op1, psi, result)
-    operators.gemv!(ComplexF64(1., 0.), op1, psi, ComplexF64(0., 0.), result)
+    QuantumOpticsBase.gemv!(ComplexF64(1., 0.), op1, psi, ComplexF64(0., 0.), result)
 end
 
 for s in S

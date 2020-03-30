@@ -19,7 +19,7 @@ function setup(N)
 end
 
 function f(op1, op2, result)
-    operators.gemm!(ComplexF64(1., 0.), op1, op2, ComplexF64(0., 0.), result)
+    QuantumOpticsBase.gemm!(ComplexF64(1., 0.), op1, op2, ComplexF64(0., 0.), result)
 end
 
 println("Benchmarking: ", name)
