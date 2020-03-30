@@ -16,7 +16,7 @@ function f(N)
     ωa = 1
     ωc = 1
     g = 2
-    tspan = [0:1:10;]
+    tspan = [0.0:1.0:10.0;]
 
     b_cavity = FockBasis(N-1)
     b_atom = SpinBasis(1//2)
