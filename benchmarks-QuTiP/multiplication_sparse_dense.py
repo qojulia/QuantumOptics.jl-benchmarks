@@ -1,4 +1,5 @@
 import scipy.sparse as sp
+import numpy as np
 import benchmarkutils
 
 basename = "multiplication_sparse_dense"
@@ -12,7 +13,7 @@ Nrand = 5
 
 def setup(N, s):
     op1 = sp.rand(N, N, s, dtype=float) * 0.2j
-    op2 = sp.rand(N, N, 1., dtype=float) * 0.1j
+    op2 = np.random.rand(N, N) * 0.1j
     return op1, op2
 
 

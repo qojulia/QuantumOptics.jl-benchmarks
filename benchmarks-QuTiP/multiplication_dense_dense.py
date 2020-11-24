@@ -1,4 +1,4 @@
-import scipy.sparse as sp
+import numpy as np
 import benchmarkutils
 
 name = "multiplication_dense_dense"
@@ -9,8 +9,8 @@ cutoffs = range(50, 601, 50)
 
 
 def setup(N):
-    op1 = sp.rand(N, N, 1., dtype=float) * 0.2j
-    op2 = sp.rand(N, N, 1., dtype=float) * 0.1j
+    op1 = np.random.rand(N, N) * 0.2j
+    op2 = np.random.rand(N, N) * 0.1j
     return op1, op2
 
 
